@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "dev": "next dev",
-    "test": "jest",
+    "test": "jest --passWithNoTests",
+    "test:watch": "npm test -- --watch",
+    "test:staged": "npm test -- --findRelatedTests",
+    "test:ci": "npm test -- --coverage",
     "prepare": "husky install"
   },
   "keywords": [],
