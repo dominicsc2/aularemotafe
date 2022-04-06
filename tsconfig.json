@@ -14,12 +14,13 @@
     "isolatedModules": false,
     "noUnusedLocals": false,
     "jsx": "preserve",
-    "rootDir": "./src",
+    "rootDirs": ["src", "tests"],
     "baseUrl": "src",
     "paths": {
       "@domain/*": ["domain/*"],
+      "@data/*": ["data/*"],
+      "@tests/*": ["../tests/*"]
     }
   },
-  "include": ["src"],
-  "exclude": ["node_modules"]
+  "include": ["src", "tests"]
 }
