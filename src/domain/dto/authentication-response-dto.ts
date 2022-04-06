@@ -1,9 +1,9 @@
 import { User } from '@domain/models'
-import { BaseResponse } from './base-repose-dto'
+import { BaseResponseDto } from './base-repose-dto'
 
-export type AuthenticationResponse = BaseResponse<AuthenticationResponse.Result>
+export type AuthenticationResponseDto = BaseResponseDto<AuthenticationResponseDto.Result>
 
-export namespace AuthenticationResponse {
+export namespace AuthenticationResponseDto {
   export type Result = {
     accessToken: string
     user?: User
