@@ -1,0 +1,28 @@
+{
+  "extends": "standard-with-typescript",
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "overrides": [
+    {
+      "files": ["*.ts"],
+      "rules": {
+        "@typescript-eslint/no-unused-vars": "off",
+        "@typescript-eslint/space-before-function-paren": "off",
+        "space-before-blocks": "off",
+        "@typescript-eslint/semi": "off",
+        "@typescript-eslint/indent": "off",
+        "eol-last": "off",
+        "no-multi-spaces": "off",
+        "@typescript-eslint/strict-boolean-expressions": "off",
+        "comma-dangle": "off",
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "@typescript-eslint/method-signature-style": "off",
+        "@typescript-eslint/member-delimiter-style": "off",
+        "@typescript-eslint/no-misused-promises": "off",
+        "node/no-path-concat": "off",
+        "@typescript-eslint/consistent-type-definitions": "off"
+      }
+    }
+  ]
+}
