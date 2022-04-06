@@ -14,7 +14,7 @@
     "isolatedModules": false,
     "noUnusedLocals": false,
     "jsx": "preserve",
-    "rootDir": "./src",
+    "rootDir": "./src"
   },
   "include": ["src"],
   "exclude": ["node_modules"]
