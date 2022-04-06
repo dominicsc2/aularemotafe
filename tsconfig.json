@@ -19,7 +19,8 @@
     "paths": {
       "@domain/*": ["domain/*"],
       "@data/*": ["data/*"],
-      "@tests/*": ["../tests/*"]
+      "@infrastructure/*": ["infrastructure/*"],
+      "@tests/*": ["../tests/*"],
     }
   },
   "include": ["src", "tests"]
