@@ -1,6 +1,6 @@
 import { HttpStatusCode } from '@data/protocols/http'
 import { RemoteSignUp } from '@data/usecases/remote-signup'
-import { BadRequestError, ForbiddenError } from '@domain/errors'
+import { BadRequestError, ForbiddenError, ServerError, UnAuthorizedError } from '@domain/errors'
 import { SignUp } from '@domain/usecases'
 import faker from '@faker-js/faker'
 import { HttpClientSpy, mockSignUpParams } from '../mocks'
@@ -45,6 +45,20 @@ describe('RemoteSignUp usecase', () => {
     await expect(promise).rejects.toBeInstanceOf(BadRequestError)
   })
 
+  test('Should throw UnAuthorizedError if HttpPostClient returns 401', async () => {
+    const errorMessage = faker.random.words()
+    const { httpClientSpy, sut } = makeSut()
+    httpClientSpy.response = {
+      statusCode: HttpStatusCode.unauthorized,
+      body: {
+        message: errorMessage
+      }
+    }
+    const promise = sut.signup(mockSignUpParams)
+    await expect(promise).rejects.toThrow(new UnAuthorizedError(errorMessage))
+    await expect(promise).rejects.toBeInstanceOf(UnAuthorizedError)
+  })
+
   test('Should throw ForbiddenError if HttpPostClient returns 403', async () => {
     const errorMessage = faker.random.words()
     const { httpClientSpy, sut } = makeSut()
@@ -57,5 +71,19 @@ describe('RemoteSignUp usecase', () => {
     const promise = sut.signup(mockSignUpParams)
     await expect(promise).rejects.toThrow(new ForbiddenError(errorMessage))
     await expect(promise).rejects.toBeInstanceOf(ForbiddenError)
+  })
+
+  test('Should throw Server if HttpPostClient returns 500', async () => {
+    const errorMessage = faker.random.words()
+    const { httpClientSpy, sut } = makeSut()
+    httpClientSpy.response = {
+      statusCode: HttpStatusCode.serverError,
+      body: {
+        message: errorMessage
+      }
+    }
+    const promise = sut.signup(mockSignUpParams)
+    await expect(promise).rejects.toThrow(new ServerError(errorMessage))
+    await expect(promise).rejects.toBeInstanceOf(ServerError)
   })
 })
