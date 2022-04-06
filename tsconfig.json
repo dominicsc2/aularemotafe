@@ -14,7 +14,11 @@
     "isolatedModules": false,
     "noUnusedLocals": false,
     "jsx": "preserve",
-    "rootDir": "./src"
+    "rootDir": "./src",
+    "baseUrl": "src",
+    "paths": {
+      "@domain/*": ["domain/*"],
+    }
   },
   "include": ["src"],
   "exclude": ["node_modules"]
