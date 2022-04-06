@@ -2,22 +2,21 @@ import { HttpRequestParams, HttpClient, HttpResponse, HttpStatusCode } from '@da
 import { SignUp } from '@domain/usecases'
 import faker from '@faker-js/faker'
 
-export const mockSignUpParams = (): SignUp.Params => {
-  const password = faker.internet.password()
-  return {
-    email: faker.internet.email(),
-    username: faker.name.findName(),
-    password: password,
-    passwordConfirm: password
-  }
+const password = faker.internet.password()
+
+export const mockSignUpParams: SignUp.Params = {
+  email: faker.internet.email(),
+  username: faker.name.findName(),
+  password: password,
+  passwordConfirm: password
 }
 
-export const mockHttpRequest = (): HttpRequestParams<any> => ({
+export const mockHttpRequest: HttpRequestParams<any> = {
   url: faker.internet.url(),
   body: {},
   headers: JSON.parse(faker.datatype.json()),
   method: faker.random.arrayElement(['GET', 'POST', 'PUT', 'PATCH', 'DELETE'])
-})
+}
 
 export class HttpClientSpy<T, R> implements HttpClient<T, R> {
   url?: string
