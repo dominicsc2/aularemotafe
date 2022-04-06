@@ -1,7 +1,6 @@
 import { HttpStatusCode } from '@data/protocols/http'
 import { RemoteSignUp } from '@data/usecases/remote-signup'
-import { AulaRemotaConstants } from '@domain/constants'
-import { ForbiddenError } from '@domain/errors'
+import { BadRequestError, ForbiddenError } from '@domain/errors'
 import { SignUp } from '@domain/usecases'
 import faker from '@faker-js/faker'
 import { HttpClientSpy, mockSignUpParams } from '../mocks'
@@ -32,15 +31,31 @@ describe('RemoteSignUp usecase', () => {
     expect(httpClientSpy.body).toEqual(addAccountParams)
   })
 
+  test('Should throw BadRequestError if HttpPostClient returns 400', async () => {
+    const errorMessage = faker.random.words()
+    const { httpClientSpy, sut } = makeSut()
+    httpClientSpy.response = {
+      statusCode: HttpStatusCode.badRequest,
+      body: {
+        message: errorMessage
+      }
+    }
+    const promise = sut.signup(mockSignUpParams)
+    await expect(promise).rejects.toThrow(new BadRequestError(errorMessage))
+    await expect(promise).rejects.toBeInstanceOf(BadRequestError)
+  })
+
   test('Should throw ForbiddenError if HttpPostClient returns 403', async () => {
+    const errorMessage = faker.random.words()
     const { httpClientSpy, sut } = makeSut()
     httpClientSpy.response = {
       statusCode: HttpStatusCode.forbidden,
       body: {
-        message: AulaRemotaConstants.EMAIL_IN_USE_ERROR
+        message: errorMessage
       }
     }
     const promise = sut.signup(mockSignUpParams)
-    await expect(promise).rejects.toThrow(new ForbiddenError(AulaRemotaConstants.EMAIL_IN_USE_ERROR))
+    await expect(promise).rejects.toThrow(new ForbiddenError(errorMessage))
+    await expect(promise).rejects.toBeInstanceOf(ForbiddenError)
   })
 })
