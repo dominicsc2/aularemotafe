@@ -4,6 +4,7 @@ import { BadRequestError, ForbiddenError, ServerError, UnAuthorizedError } from 
 import { SignUp } from '@domain/usecases'
 import faker from '@faker-js/faker'
 import { HttpClientSpy, mockSignUpParams } from '../mocks'
+import { mockAuthenticationResponseModel } from '../mocks/mock-auth'
 
 type SutTypes = {
   httpClientSpy: HttpClientSpy<SignUp.Params, SignUp.Result>
@@ -85,5 +86,12 @@ describe('RemoteSignUp usecase', () => {
     const promise = sut.signup(mockSignUpParams)
     await expect(promise).rejects.toThrow(new ServerError(errorMessage))
     await expect(promise).rejects.toBeInstanceOf(ServerError)
+  })
+
+  test('Should return AuthenticationResponseDto if httpPostClient returns 200', async () => {
+    const { httpClientSpy, sut } = makeSut()
+    httpClientSpy.response.body = mockAuthenticationResponseModel
+    const result = await sut.signup(mockSignUpParams)
+    expect(result).toEqual(mockAuthenticationResponseModel)
   })
 })
