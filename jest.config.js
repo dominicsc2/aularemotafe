@@ -2,14 +2,15 @@ module.exports = {
   roots: ['<rootDir>/tests'],
   collectCoverageFrom: ['<rootDir>/src/**/*.(ts,tsx)'],
   coverageDirectory: 'coverage',
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
   testEnvironment: 'jsdom',
   moduleNameMapper: {
-    '@domain/(.*)$': '<rootDir>/src/domain/$1',
-    '@data/(.*)$': '<rootDir>/src/data/$1',
-    '@infrastructure/(.*)$': '<rootDir>/src/infrastructure/$1',
-    '@tests/(.*)$': '<rootDir>/tests/$1'
-  },
-  transform: {
-    '.+\\.(ts|tsx)$': 'ts-jest'
+    '@clean/(.*)$': '<rootDir>/src/clean/$1',
+    '@domain/(.*)$': '<rootDir>/src/clean/domain/$1',
+    '@data/(.*)$': '<rootDir>/src/clean/data/$1',
+    '@infrastructure/(.*)$': '<rootDir>/src/clean/infrastructure/$1',
+    '@presentation/(.*)$': '<rootDir>/src/clean/presentation/$1',
+    '@tests/(.*)$': '<rootDir>/tests/$1',
+    '\\.(scss|sass|css)$': 'identity-obj-proxy',
   }
 }
