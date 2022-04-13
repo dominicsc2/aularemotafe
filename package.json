@@ -10,7 +10,8 @@
     "test": "jest --passWithNoTests --no-cache --runInBand",
     "test:verbose": "npm test -- --verbose",
     "test:watch": "npm test -- --watch",
-    "test:staged": "npm test -- --findRelatedTests"
+    "test:staged": "npm test -- --findRelatedTests",
+    "test:ci": "npm test -- --coverage"
   },
   "dependencies": {
     "axios": "^0.26.1",
