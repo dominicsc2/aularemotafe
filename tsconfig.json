@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es6",
+    "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -11,17 +11,35 @@
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": false,
-    "noUnusedLocals": false,
+    "isolatedModules": true,
     "jsx": "preserve",
-    "rootDirs": ["src", "tests"],
+    "rootDirs": [
+      "src",
+      "tests"
+    ],
     "baseUrl": "src",
     "paths": {
-      "@domain/*": ["domain/*"],
-      "@data/*": ["data/*"],
-      "@infrastructure/*": ["infrastructure/*"],
-      "@tests/*": ["../tests/*"],
-    }
+      "@clean/*": [
+        "clean/*"
+      ],
+      "@domain/*": [
+        "clean/domain/*"
+      ],
+      "@data/*": [
+        "clean/data/*"
+      ],
+      "@infrastructure/*": [
+        "clean/infrastructure/*"
+      ],
+      "@presentation/*": [
+        "clean/presentation/*"
+      ],
+      "@tests/*": [
+        "../tests/*"
+      ]
+    },
+    "incremental": true
   },
-  "include": ["src", "tests"]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"]
 }

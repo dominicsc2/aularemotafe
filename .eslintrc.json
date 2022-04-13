@@ -4,15 +4,24 @@
       "version": "detect"
     }
   },
-  "extends": ["standard-with-typescript", "plugin:react/recommended"],
-  "plugins": ["react"],
+  "extends": ["eslint:recommended", "plugin:react/recommended", "plugin:@typescript-eslint/recommended", "prettier"],
+  "plugins": ["react", "@typescript-eslint"],
   "parserOptions": {
-    "project": "./tsconfig.json"
+    "ecmaFeatures": {
+      "modules": true,
+      "jsx": true
+    },
+    "ecmaVersion": 2018,
+    "sourceType": "module"
   },
   "overrides": [
     {
-      "files": ["*.ts"],
+      "files": ["*.ts", "*.tsx"],
+      "parserOptions": {
+        "project": ["./tsconfig.json"]
+      },
       "rules": {
+        "prefer-const": "error",
         "@typescript-eslint/no-unused-vars": "off",
         "@typescript-eslint/space-before-function-paren": "off",
         "@typescript-eslint/quotes": "off",
@@ -28,10 +37,28 @@
         "@typescript-eslint/member-delimiter-style": "off",
         "@typescript-eslint/no-misused-promises": "off",
         "node/no-path-concat": "off",
+        "import/extensions": "off",
+        "import/no-duplicates": "off",
+        "import/export": "off",
+        "import/no-unresolved": "off",
         "@typescript-eslint/consistent-type-definitions": "off",
         "@typescript-eslint/no-namespace": "off",
         "@typescript-eslint/no-redeclare": "off",
-        "@typescript-eslint/no-extraneous-class": "off"
+        "@typescript-eslint/no-extraneous-class": "off",
+        "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
+        "linebreak-style": "off",
+        "no-unused-vars": "off",
+        "semi": "off",
+        "no-shadow": "off",
+        "arrow-parens": "off",
+        "react/require-default-props": "off",
+        "import/no-named-as-default": "off",
+        "react/function-component-definition": "off",
+        "react/destructuring-assignment": "off",
+        "@next/next/no-img-element": "off",
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/no-empty-function": "off",
+        "no-constant-condition": "off"
       }
     }
   ]
