@@ -1,4 +1,4 @@
-import { HttpRequestParams } from '@data/protocols/http'
+import { HttpRequestParams } from '@clean/data/protocols/http'
 import faker from '@faker-js/faker'
 import axios from 'axios'
 

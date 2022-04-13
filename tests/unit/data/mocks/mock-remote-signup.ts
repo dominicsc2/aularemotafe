@@ -1,5 +1,5 @@
-import { HttpRequestParams, HttpClient, HttpResponse, HttpStatusCode } from '@data/protocols/http'
-import { SignUp } from '@domain/usecases'
+import { HttpRequestParams, HttpClient, HttpResponse, HttpStatusCode } from '@clean/data/protocols/http'
+import { SignUp } from '@clean/domain/usecases'
 import faker from '@faker-js/faker'
 
 const password = faker.internet.password()

@@ -1,10 +1,10 @@
-import { HttpStatusCode } from '@data/protocols/http'
-import { RemoteSignUp } from '@data/usecases/remote-signup'
-import { BadRequestError, ForbiddenError, ServerError, UnAuthorizedError } from '@domain/errors'
-import { SignUp } from '@domain/usecases'
 import faker from '@faker-js/faker'
+import { HttpStatusCode } from '@clean/data/protocols/http'
+import { RemoteSignUp } from '@clean/data/usecases/remote-signup'
 import { HttpClientSpy, mockSignUpParams } from '../mocks'
 import { mockAuthenticationResponseModel } from '../mocks/mock-auth'
+import { BadRequestError, UnAuthorizedError, ForbiddenError, ServerError } from '@clean/domain/errors'
+import { SignUp } from '@clean/domain/usecases'
 
 type SutTypes = {
   httpClientSpy: HttpClientSpy<SignUp.Params, SignUp.Result>
@@ -43,7 +43,7 @@ describe('RemoteSignUp usecase', () => {
     }
     const promise = sut.signup(mockSignUpParams)
     await expect(promise).rejects.toThrow(new BadRequestError(errorMessage))
-    await expect(promise).rejects.toBeInstanceOf(BadRequestError)
+    await expect(promise).rejects.toBeInstanceOf(Error)
   })
 
   test('Should throw UnAuthorizedError if HttpPostClient returns 401', async () => {
@@ -57,7 +57,7 @@ describe('RemoteSignUp usecase', () => {
     }
     const promise = sut.signup(mockSignUpParams)
     await expect(promise).rejects.toThrow(new UnAuthorizedError(errorMessage))
-    await expect(promise).rejects.toBeInstanceOf(UnAuthorizedError)
+    await expect(promise).rejects.toBeInstanceOf(Error)
   })
 
   test('Should throw ForbiddenError if HttpPostClient returns 403', async () => {
@@ -71,7 +71,7 @@ describe('RemoteSignUp usecase', () => {
     }
     const promise = sut.signup(mockSignUpParams)
     await expect(promise).rejects.toThrow(new ForbiddenError(errorMessage))
-    await expect(promise).rejects.toBeInstanceOf(ForbiddenError)
+    await expect(promise).rejects.toBeInstanceOf(Error)
   })
 
   test('Should throw Server if HttpPostClient returns 500', async () => {
@@ -85,7 +85,7 @@ describe('RemoteSignUp usecase', () => {
     }
     const promise = sut.signup(mockSignUpParams)
     await expect(promise).rejects.toThrow(new ServerError(errorMessage))
-    await expect(promise).rejects.toBeInstanceOf(ServerError)
+    await expect(promise).rejects.toBeInstanceOf(Error)
   })
 
   test('Should return AuthenticationResponseDto if httpPostClient returns 200', async () => {
