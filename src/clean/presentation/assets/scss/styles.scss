@@ -1,0 +1,351 @@
+@import url("https://fonts.googleapis.com/css2?family=Rokkitt&family=Stylish&family=Monserrat&family=Rakkas&family=Rambla&display=swap");
+@import "./variables";
+@import "./mixins";
+@import "./utilities";
+
+// General
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  min-height: 100%;
+  position: relative;
+}
+
+body {
+  height: 100%;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Rokkitt", cursive;
+}
+
+p {
+  margin: 10px 0;
+}
+
+ul {
+  list-style-type: none;
+}
+
+hr {
+  border-width: 0px;
+  border-bottom: 2px solid $lighter-grey;
+}
+
+// Styles with embedded tags or styles (flex)
+
+.flex-items {
+  display: flex !important;
+  height: 100%;
+  .flex-content {
+    display: flex !important;
+    flex-direction: row;
+    padding: 30px 20px;
+    img {
+      width: 70px;
+      height: 70px;
+      margin: auto 0;
+      margin-right: 30px;
+    }
+    div {
+      h3 {
+        margin-bottom: 8px;
+      }
+    }
+  }
+  &.center {
+    justify-content: center;
+  }
+  &.left {
+    justify-content: left;
+  }
+  &.inner-space {
+    justify-content: space-between;
+  }
+}
+
+.flex-columns {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+  text-align: center;
+
+  img {
+    width: 200px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  h1 {
+    font-size: 30px;
+    color: $secondary-color;
+  }
+
+  p {
+    text-align: justify;
+  }
+}
+
+// Buttons
+
+.button:active,
+button:focus {
+  outline: none;
+  /* border: none; */
+  // -moz-outline-style: none;
+}
+
+.button {
+  border-radius: 4px;
+  font-family: 'Rokkitt', sans-serif;
+  color: $white-color;
+  cursor: pointer;
+  min-width: 120px;
+  height: 40px;
+  font-size: 16px;
+
+  &:active, &:focus {
+    outline: none;
+    -moz-outline-style: none;
+  }
+  
+  &-auth {
+    display: block;
+    margin: 0 5px;
+  } 
+
+  &-action {
+    display: block;
+    min-width: 250px;
+    margin: 0 auto;
+    height: 40px;
+    font-family: 'Stylish', sans-serif;
+  }
+
+  &-outline {
+    background: $white-color;
+    color: $secondary-color;
+    border: 1px solid $secondary-color;
+  }
+
+  &-outline-green {
+    background: $white-color;
+    color: $primary-color;
+    border: 1px solid $primary-color;
+  }
+
+  &-primary {
+    background: $secondary-color;
+    border: 1px solid $secondary-color;
+  }
+
+  &-secondary {
+    background: $primary-color;
+    border: 1px solid $primary-color;
+  }
+
+  &-submit {
+    width: 289px;
+    height: 43px;
+    margin-top: 10px;
+  }
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+// Switch
+
+#switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 24px;
+
+  input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+  }
+
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+  }
+
+  input:checked + .slider {
+    background-color: #0072a3;
+  }
+
+  input:focus + .slider {
+    box-shadow: 0 0 1px #0072a3;
+  }
+
+  input:checked + .slider:before {
+    -webkit-transform: translateX(25px);
+    -ms-transform: translateX(25px);
+    transform: translateX(25px);
+  }
+
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+
+  .slider.round:before {
+    border-radius: 50%;
+  }
+}
+
+// Card containers
+
+#container, #containercard {
+  position: relative;
+  grid-auto-columns: 100%;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+#card-container {
+  position: relative;
+  display: -webkit-box;
+}
+
+// Landing page styles
+
+.instructorContent,
+.studentContent {
+  position: relative;
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: cover;
+  height: 60vh;
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60vh;
+    @include background-opacity(rgb(0, 18, 49), 0.62);
+  }
+
+  .bannerInfo {
+    position: relative;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 36px;
+    text-align: center;
+    color: #fff;
+    z-index: 1;
+
+    p {
+      font-size: 18px;
+      font-family: "Rokkitt", sans-serif;
+    }
+
+    h1 {
+      font-family: "Rokkitt", sans-serif;
+      font-size: 2em;
+    }
+
+    button {
+      position: relative;
+      bottom: -100px;
+    }
+  }
+}
+
+.teacherAd {
+  position: relative;
+  background-repeat: no-repeat;
+  background-position: 70% center;
+  background-size: cover;
+  margin: 20px 0 0;
+  padding: 10px 0;
+  height: 60vh;
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60vh;
+    @include background-opacity(rgb(35, 84, 105), 0.75);
+  }
+
+  button {
+    position: relative;
+    margin-left: 20px;
+    font-family: "Stylish", sans-serif;
+    max-width: 250px !important;
+    bottom: -70px;
+    background: #0072a3;
+    border: 1px solid #0072a3;
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .teacher-content * {
+    position: relative;
+    padding: 20px;
+    text-align: left;
+    color: #fff;
+    width: 80%;
+  }
+}
+
+.studentContent {
+  &:before {
+    @include background-opacity(rgb(9, 134, 187), 0.75);
+  }
+}
+
+// Form styles
+
+.form-w-sm {
+  width: 290px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px 0 0 0 !important;
+}
+
+// Import Media Queries
+@import "media";

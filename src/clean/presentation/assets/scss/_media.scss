@@ -1,0 +1,164 @@
+// Tablets and smaller
+
+@media(max-width: 800px) {
+  .flex-items {
+    flex-direction: column;
+    &.center, &.left, &.row {
+      flex-direction: row;
+    }
+  }
+}
+
+@media(max-width: 600px) {
+  .flex-items.center {
+    flex-direction: column;
+    .button {
+      margin: 5px auto !important;
+      width: 250px !important;
+    }
+  }
+}
+
+@media (min-width: 1000px) {
+  .main-left {
+      min-height: 100vh;
+      min-width: 25%;
+      float: left;
+      top: 10px;
+      position: relative;
+      z-index: 1;
+  }
+  .left-sticky{
+    top: 60px;
+    height: 0px;
+    width: 400px;
+    position: sticky;
+    -webkit-position: sticky;
+    #form * {
+      margin-left: 0;
+      margin-right: 0;
+    }
+    .search-container * {
+      margin-left: 0;
+      margin-right: 0;
+      div {
+        margin: 15px 0;
+      }
+    }
+  }
+  .main-right {
+    margin-top: 2rem;
+  }
+}
+
+// RoundImage media queries
+
+@media screen and (min-width: 110px) {
+  #container {
+    grid-auto-columns: calc((100% - (1 - 1) * 0.6rem)/1);
+  }
+}
+
+@media screen and (min-width: 210px) {
+  #container {
+    grid-auto-columns: calc((100% - (2 - 1) * 0.6rem)/2);
+  }
+}
+
+@media screen and (min-width: 300px) {
+  #container {
+    grid-auto-columns: calc((100% - (3 - 1) * 0.6rem)/3);
+  }
+}
+
+
+@media screen and (min-width: 410px) {
+  #container {
+    grid-auto-columns: calc((100% - (4 - 1) * 0.6rem)/4);
+  }
+}
+
+@media screen and (min-width: 533px) {
+  #container {
+    grid-auto-columns: calc((100% - (5 - 1) * 0.6rem)/5);
+  }
+}
+
+@media screen and (min-width: 654px) {
+  #container {
+    grid-auto-columns: calc((100% - (6 - 1) * 0.6rem)/6);
+  }
+}
+
+@media screen and (min-width: 781px) {
+  #container {
+    grid-auto-columns: calc((100% - (7 - 1) * 0.6rem)/7);
+  }
+}
+
+@media screen and (min-width: 981px) {
+  #container {
+    grid-auto-columns: calc((100% - (8 - 1) * 0.6rem)/8);
+  }
+}
+
+@media screen and (min-width: 1095px) {
+  #container {
+    grid-auto-columns: calc((100% - (9 - 1) * 0.6rem)/9);
+  }
+}
+
+@media screen and (min-width: 1195px) {
+  #container {
+    grid-auto-columns: calc((100% - (10 - 1) * 0.6rem)/10);
+  }
+}
+
+@media screen and (min-width: 1295px) {
+  #container {
+    grid-auto-columns: calc((100% - (11 - 1) * 0.6rem)/11);
+  }
+}
+
+// End RoundImage media queries
+
+// Teacher and Document media queries
+
+@media screen and (min-width: 210px) {
+  #containercard {
+    grid-auto-columns: calc((100% - (1 - 1) * 1.6rem)/1);
+  }
+}
+
+@media screen and (min-width: 410px) {
+  #containercard {
+    grid-auto-columns: calc((100% - (2 - 1) * 1.6rem)/2);
+  }
+}
+
+@media screen and (min-width: 654px) {
+  #containercard {
+    grid-auto-columns: calc((100% - (3 - 1) * 1.6rem)/3);
+  }
+}
+
+@media screen and (min-width: 880px) {
+  #containercard {
+    grid-auto-columns: calc((100% - (4 - 1) * 1.6rem)/4);
+  }
+}
+
+@media screen and (min-width: 1195px) {
+  #containercard {
+    grid-auto-columns: calc((100% - (5 - 1) * 1.6rem)/5);
+  }
+}
+
+@media screen and (min-width: 1295px) {
+  #containercard {
+    grid-auto-columns: calc((100% - (6 - 1) * 1.6rem)/6);
+  }
+}
+
+// End Teacher and Document media queries
+
