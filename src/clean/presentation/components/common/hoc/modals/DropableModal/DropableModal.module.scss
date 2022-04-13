@@ -1,0 +1,25 @@
+.dropdown-modal {
+  position: absolute;
+  top: 45px;
+  right: 30px;
+  .dropdow-modal-menu {
+    background: #F7F7F7;
+    position: relative;
+    box-shadow: rgba(0, 0, 0, 0.4) 2px 2px 20px;
+    padding: 10px 5px;
+    width: 240px;
+    top: 15px;
+    border-radius: 4px;
+  }
+}
+
+.right:after {
+    content: "";
+    border-bottom: 10px solid white;
+    border-right: 10px solid transparent;
+    border-left: 10px solid transparent;
+    position: absolute;
+    top: -8px;;
+    right: 6%;
+}
+

@@ -1,0 +1,10 @@
+.backdropFade {
+  width: 100%;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  position: fixed;
+  background-color: #000;
+  z-index: 1;
+  transition: visibility 0s, opacity 0.5s linear;
+}

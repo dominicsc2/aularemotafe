@@ -1,0 +1,22 @@
+#review {
+    display: flex;
+    padding: 20px 0;
+    text-align: start;
+
+    .reviewContent {
+        padding-left: 20px;
+    }
+
+    .reviewRating {
+        display: flex;
+
+        img {
+            object-fit: contain;
+        }
+
+        p {
+            padding-top: 3px;
+            color: #b4b4b4;
+        }
+    }
+}

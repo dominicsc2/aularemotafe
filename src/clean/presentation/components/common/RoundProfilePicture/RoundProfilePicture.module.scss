@@ -1,0 +1,13 @@
+.profilePicture {
+    position: relative;
+    display: block;
+    border-radius: 50%;
+}
+
+.profileCentered{
+    z-index: 100;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+    margin-top: -10px;
+}

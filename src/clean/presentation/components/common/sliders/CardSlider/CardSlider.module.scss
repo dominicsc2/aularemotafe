@@ -1,0 +1,77 @@
+.leftArrow {
+  position: absolute;
+  transform: translateY(-50%);
+  top: 35%;
+  margin-left: -15px;
+  width: 40px;
+  height: 40px;
+  border: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.08);
+  z-index: 1;
+  border-radius: 50%;
+  transition: 0.5s;
+  background: rgb(247, 247, 247);
+
+  &:hover {
+    cursor: pointer;
+    background: #fff !important;
+    i {
+      border: solid #0f7c90;
+      border-width: 0 3px 3px 0;
+      display: inline-block;
+      padding: 3px;
+    }
+  }
+
+  .left {
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+  }
+}
+
+.rightArrow {
+  position: absolute;
+  transform: translateY(-50%);
+  top: 35%;
+  margin-right: -15px;
+  width: 40px;
+  height: 40px;
+  right: 1.6rem;
+  border: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.08);
+  z-index: 1;
+  border-radius: 50%;
+  transition: 0.2s;
+  background: rgb(247, 247, 247);
+
+  &:hover {
+    cursor: pointer;
+    background: #fff !important;
+    i {
+      border: solid #0f7c90;
+      border-width: 0 3px 3px 0;
+      display: inline-block;
+      padding: 3px;
+    }
+  }
+
+  .right {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+  }
+}
+
+.arrow {
+  border: solid #aaaaaa;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+  transition: 0.2s;
+}
+
+.carouselGrid {
+  display: grid;
+  grid-auto-flow: column;
+  grid-gap: 1.6rem;
+  overflow-x: hidden;
+}

@@ -1,0 +1,104 @@
+@import '@clean/presentation/assets/scss/variables';
+
+.sidebarOpen {
+  background-color: #fff;
+  display: flex;
+  margin: auto 0px;
+  font-size: 2rem;
+  background: none;
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none;
+    color: $shadow-color;
+  }
+}
+
+.active {
+  left: 0 !important;
+  transition: 450ms;
+}
+
+#sidebar {
+  display: flex;
+
+  .sidebarClose {
+    position: fixed;
+    width: 53px;
+    height: 53px;
+    padding: 8px;
+    top: 20px;
+    left: 300px;
+    background-color: #fff;
+    color: #000;
+    border-radius: 50%;
+    text-align: center;
+    font-weight: bold;
+    font-size: 34px;
+    box-shadow: 2px 2px 3px #999;
+    transition: visibility 0s, opacity 0.5s linear;
+    color: $shadow-color;
+  }
+
+  #sidebarMenu {
+    background-color: #fff;
+    height: 100vh;
+    width: 280px;
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: -100%;
+    transition: 400ms;
+    font-size: 18px;
+    z-index: 2;
+
+    hr {
+      margin-bottom: 0px;
+    }
+
+    .sidebarItems {
+      width: 100%;
+    }
+
+    .sidebarTop {
+      display: flex;
+      padding: 15px;
+
+      .topDescription {
+        margin-left: 20px;
+
+        p {
+          padding: 0;
+          margin: 0;
+          color: #b4b4b4;
+          font-size: 16px;
+        }
+      }
+    }
+
+    .sidebarTokens {
+      display: flex;
+      margin: 0px 25px 10px 25px;
+
+      p {
+        margin: 0;
+        margin-right: 25px;
+      }
+    }
+
+    .sidebarText {
+      display: flex;
+      align-items: center;
+      list-style: none;
+      padding: 10px 20px;
+      text-decoration: none;
+      color: #000;
+
+      span {
+        padding-left: 15px;
+      }
+    }
+  }
+}

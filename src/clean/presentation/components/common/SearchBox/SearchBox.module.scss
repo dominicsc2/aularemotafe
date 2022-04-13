@@ -1,0 +1,19 @@
+@import '@clean/presentation/assets/scss/variables';
+
+.button {
+  &:active,
+  &:focus {
+    outline: none;
+    -moz-outline-style: none;
+  }
+
+  i {
+    color: white;
+    font-size: 25px;
+  }
+}
+
+.searchContainer {
+  min-width: 200px;
+  max-width: 400px;
+}

@@ -1,0 +1,42 @@
+.description {
+  opacity: 0.7;
+  display: none;
+  position: fixed;
+  background-color: black;
+  padding: 10px;
+  text-align: center;
+  color: white;
+  width: 100px;
+  z-index: 1000;
+  border-radius: 10px;
+}
+
+.carouselScrollItem {
+  position: relative;
+  scroll-snap-align: start;
+}
+
+.imageContainer {
+  &:hover + .description {
+    display: block;
+  }
+}
+
+.card {
+  border-radius: 50%;
+  flex-direction: column;
+  max-width: 100%;
+  min-width: 100%;
+  max-width: 100%;
+  min-width: 100%;
+  display: flex;
+  align-items: flex-start;
+  transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out; /** Chrome & Safari **/
+  -moz-transition: all 0.2s ease-in-out; /* Firefox */
+  -o-transition: all 0.2s ease-in-out; /* Opera */
+
+  &:hover {
+    opacity: 0.85;
+  }
+}

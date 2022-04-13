@@ -1,0 +1,8 @@
+.gridCards {
+  margin: 0 auto;
+  max-width: 1200px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 0.40fr));
+  gap: 20px;
+  justify-content: center;
+}
