@@ -23,16 +23,16 @@ export const GeneralLandingPage: React.FC<Props> = (props) => (
       <FlexList contentArray={props.hookDescription} />
     </SectionContainer>
 
-    <SectionContainer id="howItWorks">
+    <SectionContainer>
       <h1 className={styles.sectionTitle}>¿Cómo funciona?</h1>
       <FlexList contentArray={props.howItWorks} />
     </SectionContainer>
 
-    <section id={styles.uploadAbout}>
+    <SectionContainer id={styles.uploadAbout}>
       <h1 className={styles.sectionTitle}>{props.uploadAbout.sectionTitle}</h1>
       <img src={props.uploadAbout.image} alt="" />
       <p>{props.uploadAbout.content}</p>
-    </section>
+    </SectionContainer>
 
     {props.additionalContent}
 

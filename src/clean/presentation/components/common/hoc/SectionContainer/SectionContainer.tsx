@@ -1,10 +1,14 @@
-import { AddedStyles } from '@clean/presentation/ts/interfaces/app.interfaces';
-import React from 'react';
+import { AddedStyles } from '@clean/presentation/ts/interfaces/app.interfaces'
+import React from 'react'
 
-export const SectionContainer: React.FC<AddedStyles> = ({ additionalStyles, children, id }) => (
-  <section aria-label="section-container" id={id && id} className={'container' + ` ${additionalStyles}`}>
-    {children}
-  </section>
-);
+export const SectionContainer: React.FC<AddedStyles> = ({ additionalStyles, children, id }) => {
+  const sectionStyles = additionalStyles ? ['container', additionalStyles].join(' ') : 'container'
 
-export default SectionContainer;
+  return (
+    <section aria-label="section-container" id={id && id} className={sectionStyles}>
+      {children}
+    </section>
+  )
+}
+
+export default SectionContainer
