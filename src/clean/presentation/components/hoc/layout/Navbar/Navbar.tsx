@@ -9,6 +9,7 @@ import Sidebar from '@clean/presentation/components/embedded-layout/Sidebar/Side
 import { PropsChild, ModalMenuOptions } from '@clean/presentation/ts/interfaces/app.interfaces'
 import classes from './Navbar.module.scss'
 import { studentProfileModalContent } from './contents/navbarContent'
+import { Image } from '@clean/presentation/components/common'
 
 const Navbar: React.FC<PropsChild> = props => {
   const [loggedIn, setLoggedIn] = useState(false)
@@ -128,15 +129,7 @@ const Navbar: React.FC<PropsChild> = props => {
             <div className={classes.sidebarShow}>
               <Sidebar />
             </div>
-            <Link href="/">
-              <img
-                src="/img/trilce.jpg"
-                alt="Logo"
-                className={classes.schooLogo}
-                // onClick={() => pageRedirect(history, "/")}
-                onClick={() => {}}
-              />
-            </Link>
+              <Image style="centered-img" src="/img/trilce.jpg" alt="Logo" size={60} additionalStyles="my-0" goToOnClick="/" />
           </div>
 
           <nav className={classes.nav}>
