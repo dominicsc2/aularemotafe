@@ -5,6 +5,6 @@ export class MinLengthValidation implements FieldValidation {
   constructor(readonly field: string, private readonly minLegth: number) {}
 
   validate(input: Record<string, string>): Error {
-    return input[this.field]?.length >= this.minLegth ? null : new MinLengthError(this.field, this.minLegth)
+    return input[this.field]?.length < this.minLegth ? new MinLengthError(this.field, this.minLegth) : null
   }
 }
