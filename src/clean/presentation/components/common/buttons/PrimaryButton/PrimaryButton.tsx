@@ -6,8 +6,10 @@ const PrimaryButton: React.FC<IntersectBaseProps> = ({
   onClick,
   additionalStyles,
   value,
+  dataTestId
 }) => (
   <button
+    data-testid={dataTestId}
     type={type}
     onClick={onClick}
     className={`button button-auth button-primary ${additionalStyles}`}

@@ -27,9 +27,9 @@ const BannerCallToAction: React.FC<IBannerCallToAction> = ({
 
   function renderButton() {
     switch (buttonStyle) {
-      case 'primary': return <PrimaryButton onClick={handleClick} value={buttonText} />;
-      case 'secondary': return <SecondaryButton onClick={handleClick} value={buttonText} />;
-      case 'outline': return <OutlineButton onClick={handleClick} value={buttonText} />;
+      case 'primary': return <PrimaryButton dataTestId="call-to-action" onClick={handleClick} value={buttonText} />;
+      case 'secondary': return <SecondaryButton dataTestId="call-to-action" onClick={handleClick} value={buttonText} />;
+      case 'outline': return <OutlineButton dataTestId="call-to-action" onClick={handleClick} value={buttonText} />;
     }
   }
   return (
