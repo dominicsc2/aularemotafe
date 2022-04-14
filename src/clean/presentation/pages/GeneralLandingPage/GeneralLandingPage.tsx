@@ -17,7 +17,7 @@ interface Props {
   footerAd: IBannerCallToAction
   additionalContent?: JSX.Element
   href: string
-  onCallToActionClick: clickHandler
+  onCallToActionClick?: clickHandler
 }
 
 export const GeneralLandingPage: React.FC<Props> = props => (

@@ -6,7 +6,6 @@ import {
 } from './StudentLandingPage/contents/studentPageContent';
 
 export const StudentLandingPage: React.FC = () => {
-  const router = useRouter();
   return (
     <GeneralLandingPage
       hookDescription={hookDescription}
@@ -14,7 +13,6 @@ export const StudentLandingPage: React.FC = () => {
       uploadAbout={uploadAbout}
       footerAd={footerAd}
       href="/instructor"
-      onCallToActionClick={() => router.push('/instructor')}
     />
   );
 };
