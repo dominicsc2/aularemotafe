@@ -1,22 +1,26 @@
-import { FieldValidation } from '@clean/validation/protocols'
 import { ValidationComposite } from '@clean/validation/validators'
 import faker from '@faker-js/faker'
+import { FieldValidationSpy } from '../mocks/mock-validation-composite'
 
-class FieldValidationSpy implements FieldValidation {
-  error: Error = null
+type SutTypes = {
+  fieldValidationsSpy: FieldValidationSpy[]
+  validationComposite: ValidationComposite
+}
 
-  constructor(readonly field: string) {}
+const makeSut = (fieldName: string): SutTypes => {
+  const fieldValidationsSpy = [new FieldValidationSpy(fieldName), new FieldValidationSpy(fieldName)]
+  const validationComposite = ValidationComposite.build(fieldValidationsSpy)
 
-  validate(input: object): Error {
-    return this.error
+  return {
+    fieldValidationsSpy,
+    validationComposite
   }
 }
 
 describe('ValidationComposite', () => {
   test('Should return an error if any validation fails', () => {
     const fieldName = faker.database.column()
-    const fieldValidationsSpy = [new FieldValidationSpy(fieldName), new FieldValidationSpy(fieldName)]
-    const validationComposite = ValidationComposite.build(fieldValidationsSpy)
+    const { fieldValidationsSpy, validationComposite } = makeSut(fieldName)
     const errorMessage = faker.random.words()
     fieldValidationsSpy[0].error = new Error(errorMessage)
     fieldValidationsSpy[1].error = new Error(faker.random.words())
