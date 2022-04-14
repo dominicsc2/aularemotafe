@@ -27,14 +27,14 @@ export const Signup: React.FC = () => {
       ...form,
       [name]: value
     })
+
+    
   }
 
   return (
     <>
       <Heading title="Comencemos" description="Empieza a conectarte con la comunidad de Aula Remota X." />
       <Form submit={() => {}} additionalStyles="form-w-sm">
-        {/* <FacebookButton additionalStyles="mb-1" value="Regístrate con Facebook" />
-        <GoogleButton value="Regístrate con Google" /> */}
         <p className='highlight link'>Register with your social networks</p>
         <Input
           elementType="input"
