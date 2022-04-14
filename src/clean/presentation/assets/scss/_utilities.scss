@@ -20,7 +20,7 @@
 section {
   button {
     display: block;
-    font-family: "Monserrat", sans-serif;
+    font-family: 'Monserrat', sans-serif;
     margin: 20px auto;
   }
 }
@@ -44,11 +44,11 @@ section {
   }
 }
 
-.flexbox{
+.flexbox {
   display: flex;
 }
 
-.google{
+.google {
   width: 289px;
   height: 43px;
   border-radius: 4px;
@@ -56,23 +56,23 @@ section {
   border-style: hidden;
 }
 
-.facebook{
+.facebook {
   width: 289px;
-    height: 43px;
-    border-radius: 4px;
-    background: #3b5998;
-    color: white;
-    border-style: hidden;
+  height: 43px;
+  border-radius: 4px;
+  background: #3b5998;
+  color: white;
+  border-style: hidden;
 }
 
-.input-align{
+.input-align {
   width: 289px;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 0px;
   min-width: 20%;
 }
-    // Padding
+// Padding
 
 .p {
   &-0 {
@@ -200,7 +200,6 @@ section {
   }
 }
 
-
 .pt {
   &-1 {
     padding-top: 1rem !important;
@@ -222,7 +221,7 @@ section {
 
 // Margin
 
-.align{
+.align {
   margin: 0 auto;
   text-align: left;
   max-width: 250px;
@@ -254,7 +253,7 @@ section {
 .mb {
   &-1 {
     margin-top: 0 !important;
-    margin-bottom:  1rem  !important;
+    margin-bottom: 1rem !important;
   }
   &-2 {
     margin-top: 0 !important;
@@ -416,7 +415,7 @@ section {
   color: $secondary-color;
   font-size: 26px;
   font-weight: bold;
-  font-family: "Rokkitt", cursive;
+  font-family: 'Rokkitt', cursive;
   &-sm {
     color: $secondary-color;
     font-size: 20px;
@@ -425,6 +424,11 @@ section {
 
 .highlight {
   color: #00a3ff;
+
+  &.link {
+    text-align: center;
+    cursor: pointer;
+  }
 }
 
 .light-grey {
@@ -432,7 +436,7 @@ section {
 }
 
 .title {
-  font-family: "Monserrat", sans-serif;
+  font-family: 'Monserrat', sans-serif;
   text-align: center;
 }
 
@@ -460,14 +464,13 @@ section {
   }
 }
 
-
 .grey-small-text {
   color: #b1b1b1;
   font-size: 14px;
   margin: 0;
 }
 
-.bold{
+.bold {
   font-weight: bold;
 }
 
@@ -479,7 +482,7 @@ section {
   margin-bottom: 0;
 }
 
-.search-container input[type="text"] {
+.search-container input[type='text'] {
   padding: 6px;
   margin-top: 8px;
   font-size: 17px;

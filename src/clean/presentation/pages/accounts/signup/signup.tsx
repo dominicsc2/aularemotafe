@@ -10,17 +10,32 @@ export const Signup: React.FC = () => {
   const router = useRouter()
   const [formState, setFormState] = useState({
     isLoading: false,
-    isFormInvalid: true
+    isFormInvalid: true,
+    mainError: ''
   })
-  const [formErrors, setFormErrors] = useState<optionInputsErrors<SignUpParamsDto>>({});
-  const [form, setForm] = useState<SignUpParamsDto>()
+  const [formErrors, setFormErrors] = useState<optionInputsErrors<SignUpParamsDto>>({})
+  const [form, setForm] = useState<SignUpParamsDto>({
+    email: '',
+    password: '',
+    passwordConfirm: '',
+    username: ''
+  })
+
+  function onChange(event: ChangeEvent<HTMLInputElement>) {
+    const { name, value } = event.target
+    setForm({
+      ...form,
+      [name]: value
+    })
+  }
 
   return (
     <>
-      <Heading title="Comencemos" description="Bienvenido a bordo, aquí comienza tu aventura en el Aula Remota X." />
+      <Heading title="Comencemos" description="Empieza a conectarte con la comunidad de Aula Remota X." />
       <Form submit={() => {}} additionalStyles="form-w-sm">
-        <FacebookButton additionalStyles="mb-1" value="Regístrate con Facebook" />
-        <GoogleButton value="Regístrate con Google" />
+        {/* <FacebookButton additionalStyles="mb-1" value="Regístrate con Facebook" />
+        <GoogleButton value="Regístrate con Google" /> */}
+        <p className='highlight link'>Register with your social networks</p>
         <Input
           elementType="input"
           elementConfig={{
@@ -31,7 +46,7 @@ export const Signup: React.FC = () => {
           value={form?.username}
           errors={formErrors.username}
           name="username"
-          changed={(event: ChangeEvent<HTMLInputElement>) => {}}
+          changed={(e: ChangeEvent<HTMLInputElement>) => onChange(e)}
         />
         <Input
           elementType="input"
@@ -44,7 +59,7 @@ export const Signup: React.FC = () => {
           errors={formErrors.email}
           name="email"
           label=""
-          changed={(e: ChangeEvent<HTMLInputElement>) => {}}
+          changed={(e: ChangeEvent<HTMLInputElement>) => onChange(e)}
         />
         <Input
           elementType="input"
@@ -56,7 +71,19 @@ export const Signup: React.FC = () => {
           value={form?.password}
           errors={formErrors.password}
           name="password"
-          changed={(e: ChangeEvent<HTMLInputElement>) => {}}
+          changed={(e: ChangeEvent<HTMLInputElement>) => onChange(e)}
+        />
+        <Input
+          elementType="input"
+          elementConfig={{
+            type: 'password',
+            placeholder: 'Confirm password'
+          }}
+          additionalStyles="input-align"
+          value={form?.passwordConfirm}
+          errors={formErrors.passwordConfirm}
+          name="passwordConfirm"
+          changed={(e: ChangeEvent<HTMLInputElement>) => onChange(e)}
         />
         {formState.isLoading ? (
           <Spinner type="spinner-replace" />
