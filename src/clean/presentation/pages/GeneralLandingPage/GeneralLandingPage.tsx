@@ -1,11 +1,14 @@
-import React from 'react';
-import BannerCallToAction from '@clean/presentation/components/common/banners/BannerCallToAction/BannerCallToAction';
-import FlexList from '@clean/presentation/components/common/flex/FlexInfoList/FlexInfoList';
-import SectionContainer from '@clean/presentation/components/common/hoc/SectionContainer/SectionContainer';
-import { IBannerCallToAction } from '@clean/presentation/components/common/interfaces/banner.interfaces';
-import { clickHandler } from '@clean/presentation/ts/types/app-types';
-import { HookDescription, HowItWorks, UploadAbout } from '../interfaces/landing-pages.interfaces';
-import styles from './GeneralLandingPage.module.scss';
+import React from 'react'
+import { IBannerCallToAction } from '@clean/presentation/components/common/interfaces/banner.interfaces'
+import { clickHandler } from '@clean/presentation/ts/types/app-types'
+import { HookDescription, HowItWorks, UploadAbout } from '../interfaces/landing-pages.interfaces'
+import {
+  SectionTitle,
+  Image,
+  BannerCallToAction,
+  SectionContainer,
+  FlexList
+} from '@clean/presentation/components/common'
 
 interface Props {
   hookDescription: HookDescription[]
@@ -17,20 +20,19 @@ interface Props {
   onCallToActionClick: clickHandler
 }
 
-export const GeneralLandingPage: React.FC<Props> = (props) => (
+export const GeneralLandingPage: React.FC<Props> = props => (
   <>
     <SectionContainer additionalStyles="-my-t-60">
       <FlexList contentArray={props.hookDescription} />
     </SectionContainer>
 
     <SectionContainer>
-      <h1 className={styles.sectionTitle}>¿Cómo funciona?</h1>
-      <FlexList contentArray={props.howItWorks} />
+      <FlexList title="¿Cómo funciona?" contentArray={props.howItWorks} />
     </SectionContainer>
 
-    <SectionContainer id={styles.uploadAbout}>
-      <h1 className={styles.sectionTitle}>{props.uploadAbout.sectionTitle}</h1>
-      <img src={props.uploadAbout.image} alt="" />
+    <SectionContainer>
+      <SectionTitle title={props.uploadAbout.sectionTitle} />
+      <Image style="centered-img" src={props.uploadAbout.image} alt={props.uploadAbout.image} />
       <p>{props.uploadAbout.content}</p>
     </SectionContainer>
 
@@ -48,6 +50,6 @@ export const GeneralLandingPage: React.FC<Props> = (props) => (
       onClick={props.onCallToActionClick}
     />
   </>
-);
+)
 
-export default GeneralLandingPage;
+export default GeneralLandingPage
