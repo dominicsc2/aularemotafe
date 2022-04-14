@@ -10,5 +10,6 @@ export interface IFlexContents {
   headingType?: 'p' | 'h1' | 'h2' | 'h3'
 }
 export interface IFlexList {
+  title?: string
   contentArray: IntersectBaseProps[]
 }

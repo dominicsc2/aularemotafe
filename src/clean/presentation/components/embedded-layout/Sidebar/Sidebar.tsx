@@ -6,7 +6,7 @@ import { SidebarData } from './content/SidebarData';
 import styles from './Sidebar.module.scss';
 // import Link from 'next/link'
 
-function Sidebar() {
+const Sidebar: React.FC = () => {
   const [sidebar, setSidebar] = useState<boolean>(false);
 
   const showSidebar = () => setSidebar(!sidebar);
