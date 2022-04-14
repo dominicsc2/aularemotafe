@@ -1,5 +1,5 @@
 import React from 'react';
-import { IntersectBaseProps } from '../../types/button.types';
+import { IntersectBaseProps } from '../../types/form.types';
 import styles from './Form.module.scss';
 
 export const Form: React.FC<IntersectBaseProps> = ({
