@@ -8,7 +8,7 @@ type AppLayoutProps = {
 }
 
 function MyApp({ Component, pageProps }: AppLayoutProps) {
-  const Layout = Component.layout || ((children) => <>{children}</>);
+  const Layout = Component.layout || ((children: any) => <>{children}</>);
   return (
     <Layout>
       <Component {...pageProps} />
