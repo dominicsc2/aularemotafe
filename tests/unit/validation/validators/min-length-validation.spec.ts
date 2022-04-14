@@ -16,9 +16,14 @@ describe('MinLengthValidation', () => {
 
   test('Should return falsy if field length is greater or equal than specify value', () => {
     const fieldName = faker.database.column()
-    const minLength = 5
-    const sut = makeSut(fieldName, minLength)
+    const sut = makeSut(fieldName, 5)
     const error = sut.validate({ [fieldName]: faker.random.alphaNumeric(6) })
+    expect(error).toBeFalsy()
+  })
+
+  test('Should return falsy if field does not exists in schema', () => {
+    const sut = makeSut(faker.database.column(), 5)
+    const error = sut.validate({ [faker.database.column()]: faker.random.alphaNumeric(6) })
     expect(error).toBeFalsy()
   })
 })
