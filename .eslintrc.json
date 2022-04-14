@@ -60,7 +60,8 @@
         "@typescript-eslint/no-empty-function": "off",
         "no-constant-condition": "off",
         "no-debugger": "off",
-        "react/react-in-jsx-scope": "off"
+        "react/react-in-jsx-scope": "off",
+        "@typescript-eslint/no-non-null-assertion": "off"
       }
     }
   ]
