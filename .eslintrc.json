@@ -58,7 +58,9 @@
         "@next/next/no-img-element": "off",
         "@typescript-eslint/no-explicit-any": "off",
         "@typescript-eslint/no-empty-function": "off",
-        "no-constant-condition": "off"
+        "no-constant-condition": "off",
+        "no-debugger": "off",
+        "react/react-in-jsx-scope": "off"
       }
     }
   ]
