@@ -1,10 +1,8 @@
-import {
-  NextPage
-} from 'next';
-import Layout from '../MainLayout/Layout';
+import React from 'react'
+import { NextPage } from 'next'
 
-type PageWithMainLayoutType = NextPage & { layout: typeof Layout }
+type PageWithMainLayoutType = NextPage & { layout: any }
 
 type PageWithLayoutType = PageWithMainLayoutType
 
-export default PageWithLayoutType;
+export default PageWithLayoutType
