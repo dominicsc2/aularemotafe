@@ -16,10 +16,10 @@ export const Signup: React.FC = () => {
   const [form, setForm] = useState<SignUpParamsDto>()
 
   return (
-    <SectionContainer>
+    <>
       <Heading title="Comencemos" description="Bienvenido a bordo, aquí comienza tu aventura en el Aula Remota X." />
       <Form submit={() => {}} additionalStyles="form-w-sm">
-        <FacebookButton additionalStyles="my-1" value="Regístrate con Facebook" />
+        <FacebookButton additionalStyles="mb-1" value="Regístrate con Facebook" />
         <GoogleButton value="Regístrate con Google" />
         <Input
           elementType="input"
@@ -76,7 +76,7 @@ export const Signup: React.FC = () => {
           </p>
         }
       />
-    </SectionContainer>
+    </>
   )
 }
 
