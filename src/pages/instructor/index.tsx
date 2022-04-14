@@ -1,6 +1,5 @@
 import React, { FC } from 'react'
-import Layout from '@clean/presentation/components/hoc/layout/MainLayout/Layout'
-import PageWithLayoutType from '@clean/presentation/components/hoc/layout/types/page-with-layout-type'
+import { PageWithLayoutType, Layout } from '@clean/presentation/components/hoc'
 import { TeacherLandingPage } from '@clean/presentation/pages'
 
 const Instructor: FC = () => <TeacherLandingPage />
