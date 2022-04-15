@@ -91,4 +91,10 @@ describe('SignupPage component', () => {
     populateField('password')
     testStatusForField('password')
   })
+
+  test('Should not show passwordConfirm error if validation succeeds', () => {
+    makeSut()
+    populateField('passwordConfirm')
+    testStatusForField('passwordConfirm')
+  })
 })
