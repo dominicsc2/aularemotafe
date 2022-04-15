@@ -1,5 +1,6 @@
 import {
   CompareFieldsValidation,
+  EmailValidation,
   MinLengthValidation,
   RequiredFieldValidation,
   ValidationBuilder
@@ -25,5 +26,11 @@ describe('ValidationBuilder', () => {
     const fieldToCompare = faker.database.column()
     const validations = ValidationBuilder.field(field).sameAs(fieldToCompare).build()
     expect(validations).toEqual([new CompareFieldsValidation(field, fieldToCompare)])
+  })
+
+  test('Should return EmailValidation', () => {
+    const field = faker.database.column()
+    const validations = ValidationBuilder.field(field).email().build()
+    expect(validations).toEqual([new EmailValidation(field)])
   })
 })
