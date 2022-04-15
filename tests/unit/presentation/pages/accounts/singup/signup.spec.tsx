@@ -1,14 +1,23 @@
 import { Signup } from "@clean/presentation/pages"
+import faker from "@faker-js/faker"
 import { render, RenderResult, screen } from "@testing-library/react"
+import { populateField, testStatusForField } from "../../helpers"
+import { ValidationSpy } from "../mocks"
 
 type SutTypes = {
   sut: RenderResult
 }
 
-const makeSut = (): SutTypes => {
+type SutParams = {
+  validationError: string
+}
+
+const makeSut = (params?: SutParams): SutTypes => {
+  const validationSpy = new ValidationSpy()
+  validationSpy.errorMessage = params?.validationError
   const sut = render(
     <Signup 
-      validation={null}
+      validation={validationSpy}
     />
   )
 
@@ -35,5 +44,12 @@ describe('SignupPage component', () => {
     expect(screen.getByTestId('username').textContent).toBe('')
     expect(screen.getByTestId('password').textContent).toBe('')
     expect(screen.getByTestId('passwordConfirm').textContent).toBe('')
+  })
+
+  test('Should show username error if validation fails', () => {
+    const validationError = faker.random.words()
+    makeSut({ validationError })
+    populateField('username')
+    testStatusForField('username', validationError)
   })
 })
