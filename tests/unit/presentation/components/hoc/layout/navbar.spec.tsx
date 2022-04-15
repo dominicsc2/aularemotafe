@@ -8,7 +8,7 @@ jest.mock('next/router', () => ({
 }))
 
 jest.mock('React', () => ({
-  ...jest.requireActual('React'),
+  ...jest.requireActual('React') as any,
   useEffect: jest.fn()
 }))
 
