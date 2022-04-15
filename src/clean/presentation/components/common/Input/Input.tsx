@@ -65,7 +65,7 @@ export const Input: React.FC<IntersectBaseProps> = (props) => {
 
   return (
     <div data-testid={`${props.name}-wrap`} className={`${styles.formControl} ${props.additionalStyles}`}>
-      { props.label ? <label className={styles.label}>{props.label}</label> : null}
+      { props.label && <label className={styles.label}>{props.label}</label> }
       { inputElement }
       { props.error && <p data-testid={`${props.name}-error`} className={styles.errorMessage}>
         * {props.error}
