@@ -85,4 +85,10 @@ describe('SignupPage component', () => {
     populateField('email')
     testStatusForField('email')
   })
+
+  test('Should not show password error if validation succeeds', () => {
+    makeSut()
+    populateField('password')
+    testStatusForField('password')
+  })
 })
