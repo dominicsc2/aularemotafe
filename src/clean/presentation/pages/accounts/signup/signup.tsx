@@ -32,7 +32,7 @@ export const Signup: React.FC<Props> = ({ validation }) => {
 
     setFormErrors((prev: any) => ({
       ...prev,
-      [name]: prev[name].push(validation.validate(name, form))
+      [name]: validation.validate(name, form)
     }))
 
     setFormState(prev => ({

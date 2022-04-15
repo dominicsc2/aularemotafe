@@ -61,7 +61,8 @@
         "no-constant-condition": "off",
         "no-debugger": "off",
         "react/react-in-jsx-scope": "off",
-        "@typescript-eslint/no-non-null-assertion": "off"
+        "@typescript-eslint/no-non-null-assertion": "off",
+        "@typescript-eslint/no-inferrable-types": "off"
       }
     }
   ]
