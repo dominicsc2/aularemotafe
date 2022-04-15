@@ -10,7 +10,7 @@ export const Input: React.FC<IntersectBaseProps> = (props) => {
   let inputElement = null;
   let inputClasses = [styles.inputElement];
 
-  if (props.errors) {
+  if (props.error) {
     inputClasses = inputClasses.concat(styles.errorField);
   }
 
@@ -18,6 +18,7 @@ export const Input: React.FC<IntersectBaseProps> = (props) => {
     case 'input':
       inputElement = (
         <input
+          data-testid={props.name}
           className={inputClasses.join(' ')}
           {...props.elementConfig}
           value={props.value}
@@ -29,6 +30,7 @@ export const Input: React.FC<IntersectBaseProps> = (props) => {
     case 'textarea':
       inputElement = (
         <textarea
+          data-testid={props.name}
           className={inputClasses.join(' ')}
           {...props.elementConfig}
           value={props.value}
@@ -52,6 +54,7 @@ export const Input: React.FC<IntersectBaseProps> = (props) => {
     default:
       inputElement = (
         <input
+          data-testid={props.name}
           className={inputClasses.join(' ')}
           {...props.elementConfig}
           value={props.value}
@@ -61,15 +64,12 @@ export const Input: React.FC<IntersectBaseProps> = (props) => {
   }
 
   return (
-    <div className={`${styles.formControl} ${props.additionalStyles}`}>
+    <div data-testid={`${props.name}-wrap`} className={`${styles.formControl} ${props.additionalStyles}`}>
       { props.label ? <label className={styles.label}>{props.label}</label> : null}
       { inputElement }
-      { props.errors && props.errors.map((err) => (
-        <p key={err} className={styles.errorMessage}>
-          *
-          {err}
-        </p>
-      ))}
+      { props.error && <p data-testid={`${props.name}-error`} className={styles.errorMessage}>
+        * {props.error}
+      </p> }
     </div>
   );
 };

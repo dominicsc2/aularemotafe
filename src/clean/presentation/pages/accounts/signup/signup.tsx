@@ -1,19 +1,21 @@
-import React, { ChangeEvent, useState } from 'react'
-import { useRouter } from 'next/router'
-import { SectionContainer, Form, Input, Spinner, SecondaryButton } from '@clean/presentation/components/common'
-import { Heading, Footer } from '../components'
 import { SignUpParamsDto } from '@clean/domain/dto'
+import { Form, Input, SecondaryButton, Spinner } from '@clean/presentation/components/common'
+import { validation } from '@clean/presentation/ts/types'
 import { optionInputsErrors } from '@clean/presentation/ts/utils'
-import { FacebookButton, GoogleButton } from '../user-components'
+import React, { ChangeEvent, useState } from 'react'
+import { Footer, Heading } from '../components'
 
-export const Signup: React.FC = () => {
-  const router = useRouter()
+type Props = validation
+
+export const Signup: React.FC<Props> = ({ validation }) => {
   const [formState, setFormState] = useState({
     isLoading: false,
     isFormInvalid: true,
     mainError: ''
   })
+
   const [formErrors, setFormErrors] = useState<optionInputsErrors<SignUpParamsDto>>({})
+
   const [form, setForm] = useState<SignUpParamsDto>({
     email: '',
     password: '',
@@ -28,14 +30,23 @@ export const Signup: React.FC = () => {
       [name]: value
     })
 
-    
+    setFormErrors((prev: any) => ({
+      ...prev,
+      [name]: prev[name].push(validation.validate(name, form))
+    }))
+
+    setFormState(prev => ({
+      ...prev,
+      isFormInvalid:
+        !!formErrors.username || !!formErrors.email || !!formErrors.password || !!formErrors.passwordConfirm
+    }))
   }
 
   return (
     <>
       <Heading title="Comencemos" description="Empieza a conectarte con la comunidad de Aula Remota X." />
       <Form submit={() => {}} additionalStyles="form-w-sm">
-        <p className='highlight link'>Register with your social networks</p>
+        <p className="highlight link">Register with your social networks</p>
         <Input
           elementType="input"
           elementConfig={{
@@ -43,8 +54,8 @@ export const Signup: React.FC = () => {
             placeholder: 'Ingresa tu nombre de usuario'
           }}
           additionalStyles="input-align"
-          value={form?.username}
-          errors={formErrors.username}
+          value={form.username}
+          error={formErrors.username}
           name="username"
           changed={(e: ChangeEvent<HTMLInputElement>) => onChange(e)}
         />
@@ -55,10 +66,9 @@ export const Signup: React.FC = () => {
             placeholder: 'Ingresa tu correo electrónico'
           }}
           additionalStyles="input-align"
-          value={form?.email}
-          errors={formErrors.email}
+          value={form.email}
+          error={formErrors.email}
           name="email"
-          label=""
           changed={(e: ChangeEvent<HTMLInputElement>) => onChange(e)}
         />
         <Input
@@ -68,8 +78,8 @@ export const Signup: React.FC = () => {
             placeholder: 'Ingresa tu contraseña'
           }}
           additionalStyles="input-align"
-          value={form?.password}
-          errors={formErrors.password}
+          value={form.password}
+          error={formErrors.password}
           name="password"
           changed={(e: ChangeEvent<HTMLInputElement>) => onChange(e)}
         />
@@ -80,8 +90,8 @@ export const Signup: React.FC = () => {
             placeholder: 'Confirm password'
           }}
           additionalStyles="input-align"
-          value={form?.passwordConfirm}
-          errors={formErrors.passwordConfirm}
+          value={form.passwordConfirm}
+          error={formErrors.passwordConfirm}
           name="passwordConfirm"
           changed={(e: ChangeEvent<HTMLInputElement>) => onChange(e)}
         />

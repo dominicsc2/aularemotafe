@@ -16,7 +16,7 @@ export interface IInput {
   shouldValidate?: boolean
   touched?: boolean
   changed: changeHandler<any>
-  errors?: string[]
+  error?: string
   label?: string
   options?: any[] | ISelectOptions[]
   option?: any

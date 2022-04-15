@@ -1,3 +1,3 @@
 export type optionInputsErrors<T> = {
-  [key in keyof T]?: string[]
+  [key in keyof T]?: string
 }
