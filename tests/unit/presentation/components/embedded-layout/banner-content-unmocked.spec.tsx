@@ -1,5 +1,5 @@
 import { BannerContent } from '@clean/presentation/components/embedded-layout'
-import { render, screen } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 import { RouterContext } from 'next/dist/shared/lib/router-context'
 import { NextRouter } from 'next/router'
 import { createMockRouter } from '../../helpers'
@@ -31,5 +31,14 @@ describe('BannerContent component', () => {
   test('Should return BannerCallToAction component if pathname is not /instructor-welcome', async () => {
     makeSut()
     expect(screen.queryByTestId('banner-call-to-action')).toBeInTheDocument()
+  })
+
+  test('Should call router with /account/login if pathname is /', () => {
+    const { router } = makeSut()
+
+    const callToActionButton = screen.getByTestId('call-to-action')
+    fireEvent.click(callToActionButton)
+
+    expect(router.push).toHaveBeenCalledWith('/account/login')
   })
 })
