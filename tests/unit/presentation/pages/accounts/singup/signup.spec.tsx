@@ -1,7 +1,8 @@
 import { Signup } from "@clean/presentation/pages"
+import { RequiredFieldError } from "@clean/validation/errors"
 import faker from "@faker-js/faker"
 import { render, RenderResult, screen } from "@testing-library/react"
-import { populateField, testStatusForField } from "../../helpers"
+import { populateField, submitForm, testStatusForField } from "../../helpers"
 import { ValidationSpy } from "../mocks"
 
 type SutTypes = {
@@ -96,5 +97,17 @@ describe('SignupPage component', () => {
     makeSut()
     populateField('passwordConfirm')
     testStatusForField('passwordConfirm')
+  })
+
+  test('Should show RequiredField error when submit button is clicked an any field is empty', async () => {
+    const error = new RequiredFieldError()
+    makeSut()
+
+    await submitForm()
+
+    testStatusForField('username', error.message)
+    testStatusForField('email', error.message)
+    testStatusForField('password', error.message)
+    testStatusForField('passwordConfirm', error.message)
   })
 })
