@@ -1,4 +1,5 @@
 import { SignUpParamsDto } from '@clean/domain/dto'
+import { SignUp } from '@clean/domain/usecases'
 import { Form, Input, SecondaryButton, Spinner } from '@clean/presentation/components/common'
 import { validation } from '@clean/presentation/ts/types'
 import { optionInputsErrors } from '@clean/presentation/ts/utils'
@@ -6,9 +7,11 @@ import { RequiredFieldError } from '@clean/validation/errors'
 import React, { ChangeEvent, useEffect, useState } from 'react'
 import { Footer, Heading } from '../components'
 
-type Props = validation
+type Props = validation & {
+  addAccount: SignUp
+}
 
-export const Signup: React.FC<Props> = ({ validation }) => {
+export const Signup: React.FC<Props> = ({ validation, addAccount }) => {
   const [formState, setFormState] = useState({
     isLoading: false,
     isFormInvalid: false,
@@ -88,6 +91,15 @@ export const Signup: React.FC<Props> = ({ validation }) => {
         setFormState({
           ...formState,
           isLoading: true
+        })
+
+        const { username, email, password, passwordConfirm } = form
+
+        await addAccount.signup({
+          email,
+          password,
+          passwordConfirm,
+          username
         })
       } else {
         setFormErrors(prev => ({
