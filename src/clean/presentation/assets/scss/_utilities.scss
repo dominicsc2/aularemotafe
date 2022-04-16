@@ -545,4 +545,9 @@ section {
   color: rgb(229, 62, 62);
   margin-top: 0.5rem;
   font-size: 0.7rem;
+  font-family: 'Monserrat', sans-serif;
+
+  &.center {
+    text-align: center;
+  }
 }
