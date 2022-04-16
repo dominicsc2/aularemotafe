@@ -53,6 +53,11 @@ describe('Navbar component', () => {
     expect(screen.getByTestId('header-container').className).toBe('container move')
   })
 
+  test('Should not display DropableModal on initial state', () => {
+    makeSut()
+    expect(screen.queryByTestId('dropable-modal')).not.toBeInTheDocument()
+  })
+
   test('Should close offer when close offer button is clicked', () => {
     makeSut()
     const closeOfferBtn = screen.getByTestId('close-offer')
@@ -66,7 +71,7 @@ describe('Navbar component', () => {
     expect(screen.getByTestId('child')).toBeInTheDocument()
   })
 
-  test('Should render BannerContent if url is not correct', () => {
+  test('Should not render BannerContent if url is not correct', () => {
     makeSut(faker.random.word())
     expect(screen.queryByTestId('child')).not.toBeInTheDocument()
   })
