@@ -18,6 +18,7 @@ export class SignUpSpy implements SignUp {
   callsCount = 0
 
   async signup(params: SignUpParamsDto): Promise<SignUp.Result> {
+    this.callsCount++
     this.params = params
     return await Promise.resolve({
       message: faker.random.words(),
