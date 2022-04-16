@@ -1,5 +1,6 @@
 import { Navbar } from '@clean/presentation/components/hoc'
-import { fireEvent, render, screen, waitFor, waitForElementToBeRemoved } from '@testing-library/react'
+import faker from '@faker-js/faker'
+import { fireEvent, render, screen } from '@testing-library/react'
 import { createMockRouter } from '@tests/unit/presentation/helpers'
 import { RouterContext } from 'next/dist/shared/lib/router-context'
 import { NextRouter } from 'next/router'
@@ -14,12 +15,12 @@ type SutTypes = {
   router: NextRouter
 }
 
-const makeSut = (): SutTypes => {
-  const router = createMockRouter({})
+const makeSut = (pathname: string = '/'): SutTypes => {
+  const router = createMockRouter({ pathname })
   render(
     <RouterContext.Provider value={router}>
       <Navbar>
-        <div></div>
+        <div data-testid="child"></div>
       </Navbar>
     </RouterContext.Provider>
   )
@@ -52,11 +53,16 @@ describe('Navbar component', () => {
     expect(screen.getByTestId('header-container').className).toBe('container move')
   })
 
-  test('Should close offer when close offer button is clicked', async () => {
+  test('Should close offer when close offer button is clicked', () => {
     makeSut()
     const closeOfferBtn = screen.getByTestId('close-offer')
     fireEvent.click(closeOfferBtn)
     expect(screen.queryByTestId('offer-wrap').style.display).toBe('none')
     expect(screen.getByTestId('header-container').className).toBe('container')
+  })
+
+  test('Should render BannerContent if url is correct', () => {
+    makeSut(faker.random.arrayElement(['/', '/instructor', '/instructor-welcome', '/main']))
+    expect(screen.getByTestId('child')).toBeInTheDocument()
   })
 })
