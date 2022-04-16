@@ -118,7 +118,6 @@ export const Signup: React.FC<Props> = ({ validation, addAccount }) => {
         }))
       }
     } catch (error: any) {
-      debugger
       setFormState({
         ...formState,
         isLoading: false,

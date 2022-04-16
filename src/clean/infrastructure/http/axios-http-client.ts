@@ -6,6 +6,7 @@ export class AxiosHttpClient<BodyType, ResponseType> implements HttpClient<BodyT
     let axiosResponse: AxiosResponse<ResponseType, BodyType>;
     try {
       axiosResponse = await axios.request({
+        withCredentials: true,
         url: data.url,
         method: data.method,
         data: data.body,
