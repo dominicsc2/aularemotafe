@@ -1,4 +1,4 @@
-import { RemoteSignUp } from "@clean/data/usecases/remote-signup";
+import { RemoteSignUp } from "@clean/data/usecases";
 import { SignUp } from "@clean/domain/usecases";
 import { makeApiUrl, makeAxiosHttpClient } from "@clean/main/factories/http";
 
