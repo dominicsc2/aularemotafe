@@ -1,9 +1,8 @@
 import { CompareFieldError } from '@clean/validation/errors'
-import { FieldValidation } from '@clean/validation/protocols'
 import { CompareFieldsValidation } from '@clean/validation/validators'
 import faker from '@faker-js/faker'
 
-const makeSut = (field: string, fieldToCompare: string): FieldValidation =>
+const makeSut = (field: string, fieldToCompare: string): CompareFieldsValidation =>
   new CompareFieldsValidation(field, fieldToCompare)
 
 describe('CompareFieldsValidation', () => {
