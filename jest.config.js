@@ -1,6 +1,9 @@
 module.exports = {
   roots: ['<rootDir>/tests'],
-  collectCoverageFrom: ['<rootDir>/src/**/*.{ts,tsx}'],
+  collectCoverageFrom: [
+    '<rootDir>/src/**/*.{ts,tsx}',
+    '!<rootDir>/src/clean/presentation/components/common/**/*.{ts,tsx}'
+  ],
   coverageDirectory: 'coverage',
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
   testEnvironment: 'jsdom',
