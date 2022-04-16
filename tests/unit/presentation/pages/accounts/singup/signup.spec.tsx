@@ -1,8 +1,8 @@
-import { SignUp } from '@clean/domain/usecases'
+import { UnAuthorizedError } from '@clean/domain/errors'
 import { Signup } from '@clean/presentation/pages'
 import { RequiredFieldError } from '@clean/validation/errors'
 import faker from '@faker-js/faker'
-import { render, RenderResult, screen } from '@testing-library/react'
+import { fireEvent, render, RenderResult, screen, waitFor, waitForElementToBeRemoved } from '@testing-library/react'
 import { populateField, simulateValidSubmit, submitForm, testStatusForField } from '../../helpers'
 import { SignUpSpy, ValidationSpy } from '../mocks'
 
@@ -142,5 +142,15 @@ describe('SignupPage component', () => {
     const { addAccountSpy } = makeSut({ validationError })
     await simulateValidSubmit()
     expect(addAccountSpy.callsCount).toBe(0)
+  })
+
+  test('Should present error if AddAccount fails', async () => {
+    const { addAccountSpy } = makeSut()
+    const error = new UnAuthorizedError('Email already exists')
+    jest.spyOn(addAccountSpy, 'signup').mockRejectedValueOnce(error)
+    await simulateValidSubmit()
+    await waitForElementToBeRemoved(() => screen.queryByTestId('spinner'))
+    expect(screen.getByTestId('main-error')).toHaveTextContent(error.message)
+    expect(screen.queryByTestId('spinner')).toBeNull()
   })
 })
