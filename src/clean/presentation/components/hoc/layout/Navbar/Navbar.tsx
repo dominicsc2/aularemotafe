@@ -124,7 +124,7 @@ const Navbar: React.FC<PropsChild> = props => {
         <p onClick={handleCloseOffer}>&times;</p>
       </div>
       <div className={classes.header}>
-        <div className={showOffer.join(' ')}>
+        <div data-testid="header-container" className={showOffer.join(' ')}>
           <div className={classes.menuWrap}>
             <div className={classes.sidebarShow}>
               <Sidebar />
