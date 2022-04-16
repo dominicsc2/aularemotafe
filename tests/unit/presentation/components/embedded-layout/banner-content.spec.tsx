@@ -1,6 +1,6 @@
 import BannerCallToAction from '@clean/presentation/components/common/banners/BannerCallToAction/BannerCallToAction'
 import { BannerContent } from '@clean/presentation/components/embedded-layout'
-import { render } from '@testing-library/react'
+import { render, screen, waitFor } from '@testing-library/react'
 import { RouterContext } from 'next/dist/shared/lib/router-context'
 import { NextRouter } from 'next/router'
 import { createMockRouter } from '../../helpers'
@@ -29,10 +29,10 @@ const makeSut = (pathname: string = '/'): SutTypes => {
 
 describe('BannerContent component', () => {
   afterEach(() => {
-    jest.resetAllMocks();
-  });
+    jest.resetAllMocks()
+  })
 
-  test('Should render student banner content if url is /', async () => {
+  test('Should render student banner content if url is /', () => {
     makeSut()
 
     const props2 = {
@@ -60,7 +60,7 @@ describe('BannerContent component', () => {
     expect(JSON.stringify((BannerCallToAction as jest.Mock).mock.calls[1])).toStrictEqual(JSON.stringify([props2, {}]))
   })
 
-  test('Should render instructor banner content if url is /instructor', async () => {
+  test('Should render instructor banner content if url is /instructor', () => {
     makeSut('/instructor')
 
     const props2 = {
@@ -70,8 +70,7 @@ describe('BannerContent component', () => {
       contentWrapperStyle: 'instructorContent',
       mainInfoStyle: 'bannerInfo',
       buttonStyle: 'secondary',
-      buttonText: 'Comienza a enseñar',
-      
+      buttonText: 'Comienza a enseñar'
     }
 
     const props1 = {
@@ -86,5 +85,41 @@ describe('BannerContent component', () => {
 
     expect(JSON.stringify((BannerCallToAction as jest.Mock).mock.calls[0])).toStrictEqual(JSON.stringify([props1, {}]))
     expect(JSON.stringify((BannerCallToAction as jest.Mock).mock.calls[1])).toStrictEqual(JSON.stringify([props2, {}]))
+  })
+
+  test('Should render instructor banner content if url is /main', () => {
+    makeSut('/main')
+
+    const props2 = {
+      backgroundImage: 'url(' + '/img/student.jpg' + ')',
+      mainTitle: 'Realiza una consulta',
+      bannerDescription:
+        'Resuelve de forma rápida las dudas que tengas respecto a algún examen, trabajo, tarea u otro tipo de documento o evento.' +
+        'Ingresa en la caja de búsqueda palabras clave como:' +
+        "<span class='hightlight'> tarea, examen, trabajo, nombre del curso.</span>" +
+        'Nuestro motor de búsqueda te redirigirá a foros de preguntas y respuestas',
+      contentWrapperStyle: 'studentContent',
+      mainInfoStyle: 'bannerInfo',
+      searchBoxPlaceholder: 'Filtra por curso o tipo de documento',
+      buttonText: 'Comienza a aprender'
+    }
+
+    const props1 = {
+      backgroundImage: 'url(/img/student.jpg)',
+      mainTitle: '',
+      bannerDescription: '',
+      contentWrapperStyle: '',
+      mainInfoStyle: '',
+      searchBoxPlaceholder: 'Filtra por curso o tipo de documento',
+      buttonText: ''
+    }
+
+    expect(JSON.stringify((BannerCallToAction as jest.Mock).mock.calls[0])).toStrictEqual(JSON.stringify([props1, {}]))
+    expect(JSON.stringify((BannerCallToAction as jest.Mock).mock.calls[1])).toStrictEqual(JSON.stringify([props2, {}]))
+  })
+
+  test('Should return Banner component if pathname is /instructor-welcome', () => {
+    makeSut('/instructor-welcome')
+    expect(screen.queryByTestId('banner')).toBeInTheDocument()
   })
 })

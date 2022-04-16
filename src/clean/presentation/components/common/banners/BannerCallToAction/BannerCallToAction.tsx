@@ -34,6 +34,7 @@ const BannerCallToAction: React.FC<IBannerCallToAction> = ({
   }
   return (
     <div
+      data-testid="banner-call-to-action"
       className={contentWrapperStyle}
       style={{
         backgroundImage: backgroundImage || '',
