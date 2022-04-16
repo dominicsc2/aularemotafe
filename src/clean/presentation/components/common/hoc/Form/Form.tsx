@@ -8,7 +8,7 @@ export const Form: React.FC<IntersectBaseProps> = ({
   children,
   additionalStyles,
 }) => (
-  <form onSubmit={submit} id={styles.form} className={`${styles.container} ${additionalStyles}`}>
+  <form data-testid="form" onSubmit={submit} id={styles.form} className={`${styles.container} ${additionalStyles}`}>
     { title ? <p className={styles.title}>{title}</p> : null }
     { children }
   </form>
