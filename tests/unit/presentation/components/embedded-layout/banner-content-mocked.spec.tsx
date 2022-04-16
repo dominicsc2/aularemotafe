@@ -43,6 +43,7 @@ describe('BannerContent component', () => {
       contentWrapperStyle: 'studentContent',
       mainInfoStyle: 'bannerInfo',
       buttonStyle: 'secondary',
+      href: '/account/login',
       buttonText: 'Comienza a aprender'
     }
 
@@ -53,6 +54,7 @@ describe('BannerContent component', () => {
       contentWrapperStyle: '',
       mainInfoStyle: '',
       buttonStyle: 'primary',
+      href: '/instructor-enquire',
       buttonText: ''
     }
 
@@ -70,6 +72,7 @@ describe('BannerContent component', () => {
       contentWrapperStyle: 'instructorContent',
       mainInfoStyle: 'bannerInfo',
       buttonStyle: 'secondary',
+      href: '/instructor-enquire',
       buttonText: 'Comienza a enseñar'
     }
 
@@ -80,6 +83,7 @@ describe('BannerContent component', () => {
       contentWrapperStyle: '',
       mainInfoStyle: '',
       buttonStyle: 'primary',
+      href: '/instructor-enquire',
       buttonText: ''
     }
 
