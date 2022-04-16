@@ -58,6 +58,12 @@ describe('Navbar component', () => {
     expect(screen.queryByTestId('dropable-modal')).not.toBeInTheDocument()
   })
 
+  test('Should render authentication button on initial state', () => {
+    makeSut()
+    expect(screen.queryByTestId('signin-button')).toBeInTheDocument()
+    expect(screen.queryByTestId('signup-button')).toBeInTheDocument()
+  })
+
   test('Should close offer when close offer button is clicked', () => {
     makeSut()
     const closeOfferBtn = screen.getByTestId('close-offer')
