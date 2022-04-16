@@ -5,7 +5,7 @@ import { RouterContext } from 'next/dist/shared/lib/router-context'
 import { NextRouter } from 'next/router'
 import { createMockRouter } from '../../helpers'
 
-window.scrollTo = jest.fn();
+window.scrollTo = jest.fn()
 
 jest.mock('@clean/presentation/components/common/banners/BannerCallToAction/BannerCallToAction', () => {
   return jest.fn(() => null)
@@ -28,6 +28,10 @@ const makeSut = (pathname: string = '/'): SutTypes => {
 }
 
 describe('BannerContent component', () => {
+  afterEach(() => {
+    jest.resetAllMocks();
+  });
+
   test('Should render student banner content if url is /', async () => {
     makeSut()
 
@@ -52,9 +56,35 @@ describe('BannerContent component', () => {
       buttonText: ''
     }
 
-    expect(JSON.stringify((BannerCallToAction as jest.Mock).mock.calls[0]))
-    .toStrictEqual(JSON.stringify([props1, {}]))
-    expect(JSON.stringify((BannerCallToAction as jest.Mock).mock.calls[1]))
-    .toStrictEqual(JSON.stringify([props2, {}]))
+    expect(JSON.stringify((BannerCallToAction as jest.Mock).mock.calls[0])).toStrictEqual(JSON.stringify([props1, {}]))
+    expect(JSON.stringify((BannerCallToAction as jest.Mock).mock.calls[1])).toStrictEqual(JSON.stringify([props2, {}]))
+  })
+
+  test('Should render instructor banner content if url is /instructor', async () => {
+    makeSut('/instructor')
+
+    const props2 = {
+      backgroundImage: 'url(' + '/img/instructor.jpg' + ')',
+      mainTitle: 'Enseña en línea a miles de estudiantes universitarios',
+      bannerDescription: 'Llega a más alumnos, comparte tu conocimientos y gana dinero.',
+      contentWrapperStyle: 'instructorContent',
+      mainInfoStyle: 'bannerInfo',
+      buttonStyle: 'secondary',
+      buttonText: 'Comienza a enseñar',
+      
+    }
+
+    const props1 = {
+      backgroundImage: 'url(/img/student.jpg)',
+      mainTitle: '',
+      bannerDescription: '',
+      contentWrapperStyle: '',
+      mainInfoStyle: '',
+      buttonStyle: 'primary',
+      buttonText: ''
+    }
+
+    expect(JSON.stringify((BannerCallToAction as jest.Mock).mock.calls[0])).toStrictEqual(JSON.stringify([props1, {}]))
+    expect(JSON.stringify((BannerCallToAction as jest.Mock).mock.calls[1])).toStrictEqual(JSON.stringify([props2, {}]))
   })
 })
