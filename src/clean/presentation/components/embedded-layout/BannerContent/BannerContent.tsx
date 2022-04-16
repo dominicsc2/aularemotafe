@@ -1,70 +1,70 @@
-import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
 import {
   emptyContent,
   mainContent,
   studentContent,
   instructorContent,
-  instructorWelcomeContent,
-} from './contents/bannerContent';
-import Banner from '../../common/banners/Banner/Banner';
-import BannerCallToAction from '../../common/banners/BannerCallToAction/BannerCallToAction';
-import { IBannerCallToAction } from '../../common/interfaces/banner.interfaces';
+  instructorWelcomeContent
+} from './contents/bannerContent'
+import Banner from '../../common/banners/Banner/Banner'
+import BannerCallToAction from '../../common/banners/BannerCallToAction/BannerCallToAction'
+import { IBannerCallToAction } from '../../common/interfaces/banner.interfaces'
 
 const BannerContent: React.FC = () => {
-  const [flowType, setFlowType] = useState<string>();
-  const router = useRouter();
+  const [flowType, setFlowType] = useState<string>()
+  const router = useRouter()
 
   useEffect(() => {
-    bannerContent();
-    window.scrollTo(0, 0);
-  }, [router]);
+    bannerContent()
+    window.scrollTo(0, 0)
+  }, [router])
 
-  const [navbarBannerContent, setNavbarBannerContent] = useState<IBannerCallToAction>(emptyContent);
+  const [navbarBannerContent, setNavbarBannerContent] = useState<IBannerCallToAction>(emptyContent)
 
   const bannerContent = () => {
     switch (router.pathname) {
       case '/': {
-        setNavbarBannerContent(studentContent);
-        setFlowType('student');
-        break;
+        setNavbarBannerContent(studentContent)
+        setFlowType('student')
+        break
       }
       case '/instructor': {
         // manage this with state instead of url (redux)
-        setNavbarBannerContent(instructorContent);
-        setFlowType('instructor');
-        break;
+        setNavbarBannerContent(instructorContent)
+        setFlowType('instructor')
+        break
       }
       case '/main': {
         // manage this with state instead of url (redux)
-        setNavbarBannerContent(mainContent);
-        break;
+        setNavbarBannerContent(mainContent)
+        break
       }
     }
-  };
+  }
 
   function goToEnquireFlow() {
     if (flowType === 'student') {
-      router.push('/account/login');
+      return '/account/login'
       // router.push('/student-enquire')
       // pageRedirect(history, '/student-enquire', '?step=1');
     } else {
-      router.push('/instructor-enquire');
+      return '/instructor-enquire'
       // pageRedirect(history, '/instructor-enquire', '?step=1');
     }
   }
 
   const renderExtra = () => {
-    const extra: any = {};
+    const extra: any = {}
     if (router.pathname === '/main') {
-      extra.searchBoxPlaceholder = 'Filtra por curso o tipo de documento';
+      extra.searchBoxPlaceholder = 'Filtra por curso o tipo de documento'
     } else {
-      extra.buttonStyle = navbarBannerContent.buttonStyle;
-      extra.onClick = goToEnquireFlow;
+      extra.buttonStyle = navbarBannerContent.buttonStyle
+      extra.href = goToEnquireFlow()
     }
 
-    return extra;
-  };
+    return extra
+  }
 
   function renderBanner() {
     if (router.pathname === '/instructor-welcome') {
@@ -76,7 +76,7 @@ const BannerContent: React.FC = () => {
           height="40vh"
           textPosition="top"
         />
-      );
+      )
     }
     return (
       <BannerCallToAction
@@ -88,10 +88,10 @@ const BannerContent: React.FC = () => {
         {...renderExtra()}
         buttonText={navbarBannerContent.buttonText}
       />
-    );
+    )
   }
 
-  return renderBanner();
-};
+  return renderBanner()
+}
 
-export default BannerContent;
+export default BannerContent
