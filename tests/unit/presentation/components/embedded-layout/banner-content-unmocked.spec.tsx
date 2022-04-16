@@ -41,4 +41,13 @@ describe('BannerContent component', () => {
 
     expect(router.push).toHaveBeenCalledWith('/account/login')
   })
+
+  test('Should call router with /instructor-enquire if pathname is /instructor', () => {
+    const { router } = makeSut('/instructor')
+
+    const callToActionButton = screen.getByTestId('call-to-action')
+    fireEvent.click(callToActionButton)
+
+    expect(router.push).toHaveBeenCalledWith('/instructor-enquire')
+  })
 })
