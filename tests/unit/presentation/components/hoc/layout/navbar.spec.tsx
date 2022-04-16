@@ -65,4 +65,9 @@ describe('Navbar component', () => {
     makeSut(faker.random.arrayElement(['/', '/instructor', '/instructor-welcome', '/main']))
     expect(screen.getByTestId('child')).toBeInTheDocument()
   })
+
+  test('Should render BannerContent if url is not correct', () => {
+    makeSut(faker.random.word())
+    expect(screen.queryByTestId('child')).not.toBeInTheDocument()
+  })
 })
