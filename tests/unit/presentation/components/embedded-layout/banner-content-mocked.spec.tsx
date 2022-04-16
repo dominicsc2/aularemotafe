@@ -1,6 +1,6 @@
 import BannerCallToAction from '@clean/presentation/components/common/banners/BannerCallToAction/BannerCallToAction'
 import { BannerContent } from '@clean/presentation/components/embedded-layout'
-import { render, screen, waitFor } from '@testing-library/react'
+import { render } from '@testing-library/react'
 import { RouterContext } from 'next/dist/shared/lib/router-context'
 import { NextRouter } from 'next/router'
 import { createMockRouter } from '../../helpers'
@@ -116,10 +116,5 @@ describe('BannerContent component', () => {
 
     expect(JSON.stringify((BannerCallToAction as jest.Mock).mock.calls[0])).toStrictEqual(JSON.stringify([props1, {}]))
     expect(JSON.stringify((BannerCallToAction as jest.Mock).mock.calls[1])).toStrictEqual(JSON.stringify([props2, {}]))
-  })
-
-  test('Should return Banner component if pathname is /instructor-welcome', () => {
-    makeSut('/instructor-welcome')
-    expect(screen.queryByTestId('banner')).toBeInTheDocument()
   })
 })
