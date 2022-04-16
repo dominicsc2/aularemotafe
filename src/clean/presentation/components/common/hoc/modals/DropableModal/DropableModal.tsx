@@ -6,7 +6,7 @@ interface ModalContent {
   // setShow: Dispatch<SetStateAction<boolean>>
 }
 export const DropableModal : React.FC<ModalContent> = (props) => (
-  <div className={styles['dropdown-modal']}>
+  <div data-testid="dropable-modal" className={styles['dropdown-modal']}>
     <div className={`${styles['dropdow-modal-menu']} ${styles.right}`}>
       { props.children }
     </div>
