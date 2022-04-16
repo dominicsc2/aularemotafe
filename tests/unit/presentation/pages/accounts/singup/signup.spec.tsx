@@ -1,14 +1,23 @@
 import { UnAuthorizedError } from '@clean/domain/errors'
 import { Signup } from '@clean/presentation/pages'
+import { setAccessToken } from '@clean/presentation/store/access-token-store'
 import { RequiredFieldError } from '@clean/validation/errors'
 import faker from '@faker-js/faker'
-import { fireEvent, render, RenderResult, screen, waitFor, waitForElementToBeRemoved } from '@testing-library/react'
+import { render, RenderResult, screen, waitFor } from '@testing-library/react'
+import { createMockRouter } from '@tests/unit/presentation/helpers'
+import { RouterContext } from 'next/dist/shared/lib/router-context'
+import { NextRouter } from 'next/router'
 import { populateField, simulateValidSubmit, submitForm, testStatusForField } from '../../helpers'
 import { SignUpSpy, ValidationSpy } from '../mocks'
+
+jest.mock('@clean/presentation/store/access-token-store')
+
+jest.mock('next/link')
 
 type SutTypes = {
   sut: RenderResult
   addAccountSpy: SignUpSpy
+  router: NextRouter
 }
 
 type SutParams = {
@@ -19,11 +28,17 @@ const makeSut = (params?: SutParams): SutTypes => {
   const validationSpy = new ValidationSpy()
   const addAccountSpy = new SignUpSpy()
   validationSpy.errorMessage = params?.validationError
-  const sut = render(<Signup validation={validationSpy} addAccount={addAccountSpy} />)
+  const router = createMockRouter({})
+  const sut = render(
+    <RouterContext.Provider value={router}>
+      <Signup validation={validationSpy} addAccount={addAccountSpy} />
+    </RouterContext.Provider>
+  )
 
   return {
     sut,
-    addAccountSpy
+    addAccountSpy,
+    router
   }
 }
 
@@ -147,10 +162,17 @@ describe('SignupPage component', () => {
   test('Should present error if AddAccount fails', async () => {
     const { addAccountSpy } = makeSut()
     const error = new UnAuthorizedError('Email already exists')
-    jest.spyOn(addAccountSpy, 'signup').mockRejectedValueOnce(error)
+    jest.spyOn(addAccountSpy, 'signup').mockImplementationOnce(() => Promise.reject(error))
     await simulateValidSubmit()
-    await waitForElementToBeRemoved(() => screen.queryByTestId('spinner'))
-    expect(screen.getByTestId('main-error')).toHaveTextContent(error.message)
+    await waitFor(() => expect(screen.getByTestId('main-error')).toHaveTextContent(error.message))
     expect(screen.queryByTestId('spinner')).toBeNull()
+  })
+
+  test('Should call setAccessToken on success', async () => {
+    const { addAccountSpy, router } = makeSut()
+    await simulateValidSubmit()
+    expect(setAccessToken).toHaveBeenCalledWith(addAccountSpy.account.accessToken)
+
+    expect(router.replace).toHaveBeenCalledWith('/account/student-enquirement')
   })
 })
