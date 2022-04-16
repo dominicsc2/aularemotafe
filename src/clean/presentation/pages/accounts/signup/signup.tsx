@@ -1,6 +1,7 @@
 import { SignUpParamsDto } from '@clean/domain/dto'
 import { SignUp } from '@clean/domain/usecases'
 import { Form, Input, SecondaryButton, Spinner } from '@clean/presentation/components/common'
+import { FormState } from '@clean/presentation/protocols'
 import { validation } from '@clean/presentation/ts/types'
 import { optionInputsErrors } from '@clean/presentation/ts/utils'
 import { RequiredFieldError } from '@clean/validation/errors'
@@ -12,7 +13,7 @@ type Props = validation & {
 }
 
 export const Signup: React.FC<Props> = ({ validation, addAccount }) => {
-  const [formState, setFormState] = useState({
+  const [formState, setFormState] = useState<FormState>({
     isLoading: false,
     isFormInvalid: false,
     mainError: ''
@@ -172,7 +173,12 @@ export const Signup: React.FC<Props> = ({ validation, addAccount }) => {
         {formState.isLoading ? (
           <Spinner type="spinner-replace" />
         ) : (
-          <SecondaryButton data-testid="submit" type="submit" additionalStyles="button-submit" value="Regístrate" />
+          <SecondaryButton dataTestId="submit" type="submit" additionalStyles="button-submit" value="Regístrate" />
+        )}
+        {formState.mainError && (
+          <span data-testid="main-error" className="error-message">
+            {formState.mainError}
+          </span>
         )}
       </Form>
       <Footer

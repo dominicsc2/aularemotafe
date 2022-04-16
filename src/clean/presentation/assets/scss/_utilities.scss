@@ -538,3 +538,11 @@ section {
 .absolute {
   position: absolute;
 }
+
+// form status
+
+.error-message {
+  color: rgb(229, 62, 62);
+  margin-top: 0.5rem;
+  font-size: 0.7rem;
+}
