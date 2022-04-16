@@ -22,7 +22,6 @@
       },
       "rules": {
         "prefer-const": "error",
-        "@typescript-eslint/no-unused-vars": "off",
         "@typescript-eslint/space-before-function-paren": "off",
         "@typescript-eslint/quotes": "off",
         "space-before-blocks": "off",
@@ -47,7 +46,6 @@
         "@typescript-eslint/no-extraneous-class": "off",
         "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
         "linebreak-style": "off",
-        "no-unused-vars": "off",
         "semi": "off",
         "no-shadow": "off",
         "arrow-parens": "off",

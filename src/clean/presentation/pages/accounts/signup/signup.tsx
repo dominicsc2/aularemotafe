@@ -1,11 +1,13 @@
+import React, { ChangeEvent, useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
 import { SignUpParamsDto } from '@clean/domain/dto'
 import { SignUp } from '@clean/domain/usecases'
 import { Form, Input, SecondaryButton, Spinner } from '@clean/presentation/components/common'
 import { FormState } from '@clean/presentation/protocols'
+import { setAccessToken } from '@clean/presentation/store/access-token-store'
 import { validation } from '@clean/presentation/ts/types'
 import { optionInputsErrors } from '@clean/presentation/ts/utils'
 import { RequiredFieldError } from '@clean/validation/errors'
-import React, { ChangeEvent, useEffect, useState } from 'react'
 import { Footer, Heading } from '../components'
 
 type Props = validation & {
@@ -13,6 +15,8 @@ type Props = validation & {
 }
 
 export const Signup: React.FC<Props> = ({ validation, addAccount }) => {
+  const router = useRouter()
+
   const [formState, setFormState] = useState<FormState>({
     isLoading: false,
     isFormInvalid: false,
@@ -96,12 +100,18 @@ export const Signup: React.FC<Props> = ({ validation, addAccount }) => {
 
         const { username, email, password, passwordConfirm } = form
 
-        await addAccount.signup({
+        const {
+          result: { accessToken }
+        } = await addAccount.signup({
           email,
           password,
           passwordConfirm,
           username
         })
+
+        setAccessToken(accessToken)
+
+        router.replace('/account/student-enquirement')
       } else {
         setFormErrors(prev => ({
           ...prev,

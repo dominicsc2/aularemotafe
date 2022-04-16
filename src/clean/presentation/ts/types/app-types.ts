@@ -8,5 +8,5 @@ export type clickHandler = (event: MouseEvent<HTMLButtonElement, any>) => void;
 export type clickStateHandler = (value: SetStateAction<boolean>) => void;
 
 export type validation = {
-  validation : Validation | undefined
+  validation : Validation
 }
