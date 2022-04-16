@@ -2,7 +2,7 @@ import { Signup } from "@clean/presentation/pages"
 import { RequiredFieldError } from "@clean/validation/errors"
 import faker from "@faker-js/faker"
 import { render, RenderResult, screen } from "@testing-library/react"
-import { populateField, submitForm, testStatusForField } from "../../helpers"
+import { populateField, simulateValidSubmit, submitForm, testStatusForField } from "../../helpers"
 import { ValidationSpy } from "../mocks"
 
 type SutTypes = {
@@ -109,5 +109,11 @@ describe('SignupPage component', () => {
     testStatusForField('email', error.message)
     testStatusForField('password', error.message)
     testStatusForField('passwordConfirm', error.message)
+  })
+
+  test('Should show a spinner on submit', async () => {
+    makeSut()
+    await simulateValidSubmit()
+    expect(screen.queryByTestId('spinner')).toBeInTheDocument()
   })
 })

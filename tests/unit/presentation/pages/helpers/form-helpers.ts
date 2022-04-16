@@ -21,3 +21,15 @@ export const submitForm = async () => {
   fireEvent.submit(form)
   await waitFor(() => form)
 }
+
+export const simulateValidSubmit = async (
+  username = faker.internet.userName(),
+  email = faker.internet.email(),
+  password = faker.internet.password(),
+): Promise<void> => {
+  populateField('username', username)
+  populateField('email', email)
+  populateField('password', password)
+  populateField('passwordConfirm', password)
+  await submitForm()
+}
