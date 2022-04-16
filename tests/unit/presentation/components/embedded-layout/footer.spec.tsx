@@ -1,6 +1,8 @@
 import { Footer } from "@clean/presentation/components/embedded-layout"
 import { render, screen } from "@testing-library/react"
 
+window.scrollTo = jest.fn()
+
 const makeSut = (): void => {
   render(<Footer />)
 }
