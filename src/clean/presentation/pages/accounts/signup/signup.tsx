@@ -20,6 +20,7 @@ export const Signup: React.FC<Props> = ({ validation, addAccount }) => {
   const [formState, setFormState] = useState<FormState>({
     isLoading: false,
     isFormInvalid: false,
+    formTouched: false,
     mainError: ''
   })
 
@@ -33,36 +34,34 @@ export const Signup: React.FC<Props> = ({ validation, addAccount }) => {
   })
 
   useEffect(() => {
-    setFormErrors((prev: any) => ({
-      ...prev,
-      username: validation.validate('username', form)
-    }))
+    validate('username')
   }, [form.username])
 
   useEffect(() => {
-    setFormErrors((prev: any) => ({
-      ...prev,
-      email: validation.validate('email', form)
-    }))
+    validate('email')
   }, [form.email])
 
   useEffect(() => {
-    setFormErrors((prev: any) => ({
-      ...prev,
-      password: validation.validate('password', form)
-    }))
+    validate('password')
   }, [form.password])
 
   useEffect(() => {
+    validate('passwordConfirm')
+  }, [form.passwordConfirm])
+
+  const validate = (field: string): void => {
+    if (!formState.formTouched) return
+
     setFormErrors((prev: any) => ({
       ...prev,
-      passwordConfirm: validation.validate('passwordConfirm', form)
+      [field]: validation.validate(field, form)
     }))
-  }, [form.passwordConfirm])
+  }
 
   useEffect(() => {
     setFormState(prev => ({
       ...prev,
+      formTouched: true,
       isFormInvalid:
         !!formErrors.username || !!formErrors.email || !!formErrors.password || !!formErrors.passwordConfirm
     }))
@@ -119,6 +118,7 @@ export const Signup: React.FC<Props> = ({ validation, addAccount }) => {
         }))
       }
     } catch (error: any) {
+      debugger
       setFormState({
         ...formState,
         isLoading: false,
@@ -180,15 +180,15 @@ export const Signup: React.FC<Props> = ({ validation, addAccount }) => {
           name="passwordConfirm"
           changed={(e: ChangeEvent<HTMLInputElement>) => onChange(e)}
         />
+        {formState.mainError && (
+          <span data-testid="main-error" className="error-message center">
+            {formState.mainError}
+          </span>
+        )}
         {formState.isLoading ? (
           <Spinner type="spinner-replace" />
         ) : (
           <SecondaryButton dataTestId="submit" type="submit" additionalStyles="button-submit" value="Regístrate" />
-        )}
-        {formState.mainError && (
-          <span data-testid="main-error" className="error-message">
-            {formState.mainError}
-          </span>
         )}
       </Form>
       <Footer
