@@ -4,10 +4,15 @@ import { setAccessToken } from '@clean/presentation/store/access-token-store'
 import { RequiredFieldError } from '@clean/validation/errors'
 import faker from '@faker-js/faker'
 import { render, RenderResult, screen, waitFor } from '@testing-library/react'
-import { createMockRouter } from '@tests/unit/presentation/helpers'
+import {
+  createMockRouter,
+  populateField,
+  simulateValidSubmit,
+  submitForm,
+  testStatusForField
+} from '@tests/unit/presentation/helpers'
 import { RouterContext } from 'next/dist/shared/lib/router-context'
 import { NextRouter } from 'next/router'
-import { populateField, simulateValidSubmit, submitForm, testStatusForField } from '../../helpers'
 import { SignUpSpy, ValidationSpy } from '../mocks'
 
 jest.mock('@clean/presentation/store/access-token-store')

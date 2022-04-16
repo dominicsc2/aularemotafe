@@ -1,39 +1,40 @@
-import { Navbar } from '@clean/presentation/components/hoc'
-import { fireEvent, render, screen } from '@testing-library/react'
-import { useRouter } from 'next/router'
 import React from 'react'
-
-jest.mock('next/router', () => ({
-  useRouter: jest.fn()
-}))
+import { fireEvent, render, screen } from '@testing-library/react'
+import { NextRouter, useRouter } from 'next/router'
+import { RouterContext } from 'next/dist/shared/lib/router-context'
+import { Navbar } from '@clean/presentation/components/hoc'
+import { createMockRouter } from '@tests/unit/presentation/helpers'
 
 jest.mock('React', () => ({
-  ...jest.requireActual('React') as any,
+  ...(jest.requireActual('React') as any),
   useEffect: jest.fn()
 }))
 
-const makeSut = (): void => {
+type SutTypes = {
+  router: NextRouter
+}
+
+const makeSut = (): SutTypes => {
+  const router = createMockRouter({})
   render(
-    <Navbar>
-      <div></div>
-    </Navbar>
+    <RouterContext.Provider value={router}>
+      <Navbar>
+        <div></div>
+      </Navbar>
+    </RouterContext.Provider>
   )
+
+  return {
+    router
+  }
 }
 
 describe('Navbar component', () => {
   test('Should go to signup page on register button clicked', () => {
-    const push = jest.fn()
-    const pathname = jest.fn()
-
-    ;(useRouter as jest.Mock).mockImplementationOnce(() => ({
-      push,
-      pathname
-    }))
-
-    makeSut()
+    const { router } = makeSut()
 
     const button = screen.getByTestId('signup-button')
     fireEvent.click(button)
-    expect(push).toHaveBeenCalledWith('/accounts/signup')
+    expect(router.push).toHaveBeenCalledWith('/accounts/signup')
   })
 })
