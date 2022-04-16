@@ -37,4 +37,12 @@ describe('Navbar component', () => {
     fireEvent.click(button)
     expect(router.push).toHaveBeenCalledWith('/accounts/signup')
   })
+
+  test('Should go to login page on login button clicked', async () => {
+    const { router } = makeSut()
+
+    const button = screen.getByTestId('signin-button')
+    fireEvent.click(button)
+    expect(router.push).toHaveBeenCalledWith('/accounts/login')
+  })
 })
