@@ -117,11 +117,17 @@ const Navbar: React.FC<PropsChild> = props => {
 
   return (
     <header>
-      <div className={classes.offer} style={!closeOffer ? { display: 'flex' } : { display: 'none' }}>
+      <div
+        data-testid="offer-wrap"
+        className={classes.offer}
+        style={!closeOffer ? { display: 'flex' } : { display: 'none' }}
+      >
         <p>
           ¡Los resultados del sorteo semanal ya están disponibles ! <span> Ver resultados</span>
         </p>
-        <p onClick={handleCloseOffer}>&times;</p>
+        <p data-testid="close-offer" onClick={handleCloseOffer}>
+          &times;
+        </p>
       </div>
       <div className={classes.header}>
         <div data-testid="header-container" className={showOffer.join(' ')}>
@@ -129,7 +135,14 @@ const Navbar: React.FC<PropsChild> = props => {
             <div className={classes.sidebarShow}>
               <Sidebar />
             </div>
-              <Image style="centered-img" src="/img/trilce.jpg" alt="Logo" size={60} additionalStyles="my-0" goToOnClick="/" />
+            <Image
+              style="centered-img"
+              src="/img/trilce.jpg"
+              alt="Logo"
+              size={60}
+              additionalStyles="my-0"
+              goToOnClick="/"
+            />
           </div>
 
           <nav className={classes.nav}>
