@@ -1,0 +1,1 @@
+export * from './singup/remote-signup-factory'
