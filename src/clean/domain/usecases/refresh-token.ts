@@ -1,7 +1,7 @@
-import { AuthenticationResponseDto } from "../dto"
+import { AuthenticationResponseDto } from '../dto'
 
 export interface RefreshToken {
-  refreshTokens(refreshToken: string): Promise<RefreshToken.Result>
+  refreshTokens(): Promise<RefreshToken.Result>
 }
 
 export namespace RefreshToken {
