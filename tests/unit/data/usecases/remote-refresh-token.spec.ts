@@ -4,6 +4,7 @@ import { ServerError, UnAuthorizedError } from "@clean/domain/errors"
 import { SignUp } from "@clean/domain/usecases"
 import faker from "@faker-js/faker"
 import { HttpClientSpy } from "../mocks"
+import { mockAuthenticationResponseModel } from "../mocks/mock-auth"
 
 type SutTypes = {
   httpClientSpy: HttpClientSpy<SignUp.Params, SignUp.Result>
@@ -55,5 +56,18 @@ describe('RemoteRefreshToken usecase', () => {
     const promise = sut.refreshTokens()
     await expect(promise).rejects.toThrowError(new ServerError(errorMessage))
     await expect(promise).rejects.toBeInstanceOf(ServerError)
+  })
+
+  test('Should return AuthenticationResponseDto if httpPostClient returns 200', async () => {
+    const { httpClientSpy, sut } = makeSut()
+    httpClientSpy.response.body = mockAuthenticationResponseModel(false)
+    const result = await sut.refreshTokens()
+    expect(result).toEqual({
+      message: httpClientSpy.response.body.message,
+      result: {
+        accessToken: httpClientSpy.response.body.result.accessToken,
+      },
+      success: true
+    })
   })
 })
