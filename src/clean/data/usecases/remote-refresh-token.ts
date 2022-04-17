@@ -13,6 +13,8 @@ export class RemoteRefreshToken implements RefreshToken {
     })
 
     switch(httpResponse.statusCode) {
+      case HttpStatusCode.ok:
+        return httpResponse.body
       case HttpStatusCode.unauthorized:
         throw new UnAuthorizedError(httpResponse.body.message)
       default:
