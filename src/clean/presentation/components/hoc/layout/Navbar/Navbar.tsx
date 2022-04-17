@@ -1,15 +1,14 @@
-import React, { Fragment, useEffect, useState } from 'react'
-import Link from 'next/link'
-import { useRouter } from 'next/router'
+import { Image } from '@clean/presentation/components/common'
 import OutlineButton from '@clean/presentation/components/common/buttons/OutlineButton/OutlineButton'
 import PrimaryButton from '@clean/presentation/components/common/buttons/PrimaryButton/PrimaryButton'
 import FlexContainer from '@clean/presentation/components/common/flex/FlexContainer/FlexContainer'
 import DropableModal from '@clean/presentation/components/common/hoc/modals/DropableModal/DropableModal'
 import Sidebar from '@clean/presentation/components/embedded-layout/Sidebar/Sidebar'
-import { PropsChild, ModalMenuOptions } from '@clean/presentation/ts/interfaces/app.interfaces'
-import classes from './Navbar.module.scss'
+import { ModalMenuOptions, PropsChild } from '@clean/presentation/ts/interfaces/app.interfaces'
+import { useRouter } from 'next/router'
+import React, { Fragment, useEffect, useState } from 'react'
 import { studentProfileModalContent } from './contents/navbarContent'
-import { Image } from '@clean/presentation/components/common'
+import classes from './Navbar.module.scss'
 
 const Navbar: React.FC<PropsChild> = props => {
   const [loggedIn, setLoggedIn] = useState(false)
@@ -18,7 +17,7 @@ const Navbar: React.FC<PropsChild> = props => {
   const [closeOffer, setCloseOffer] = useState(false)
 
   const router = useRouter()
-
+  
   useEffect(() => {
     handleScroll()
     window.addEventListener('scroll', handleScroll)
