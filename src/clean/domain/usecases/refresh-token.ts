@@ -5,5 +5,5 @@ export interface RefreshToken {
 }
 
 export namespace RefreshToken {
-  export type Result = AuthenticationResponseDto.Result
+  export type Result = AuthenticationResponseDto
 }
