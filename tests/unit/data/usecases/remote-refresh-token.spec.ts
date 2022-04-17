@@ -1,6 +1,6 @@
 import { HttpStatusCode } from "@clean/data/protocols/http"
 import { RemoteRefreshToken } from "@clean/data/usecases/remote-refresh-token"
-import { UnAuthorizedError } from "@clean/domain/errors"
+import { ServerError, UnAuthorizedError } from "@clean/domain/errors"
 import { SignUp } from "@clean/domain/usecases"
 import faker from "@faker-js/faker"
 import { HttpClientSpy } from "../mocks"
@@ -41,5 +41,19 @@ describe('RemoteRefreshToken usecase', () => {
     const promise = sut.refreshTokens()
     await expect(promise).rejects.toThrowError(new UnAuthorizedError(errorMessage))
     await expect(promise).rejects.toBeInstanceOf(UnAuthorizedError)
+  })
+
+  test('Should throw ServerError if HttpPostClient returns 500', async () => {
+    const errorMessage = faker.random.words()
+    const { httpClientSpy, sut } = makeSut()
+    httpClientSpy.response = {
+      statusCode: HttpStatusCode.serverError,
+      body: {
+        message: errorMessage
+      }
+    }
+    const promise = sut.refreshTokens()
+    await expect(promise).rejects.toThrowError(new ServerError(errorMessage))
+    await expect(promise).rejects.toBeInstanceOf(ServerError)
   })
 })
