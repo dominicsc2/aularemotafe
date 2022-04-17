@@ -1,5 +1,5 @@
 import { AuthenticationResponseDto } from '@clean/domain/dto'
-import { UnAuthorizedError } from '@clean/domain/errors'
+import { ServerError, UnAuthorizedError } from '@clean/domain/errors'
 import { RefreshToken } from '@clean/domain/usecases'
 import { HttpClient, HttpStatusCode } from '../protocols/http'
 
@@ -15,7 +15,8 @@ export class RemoteRefreshToken implements RefreshToken {
     switch(httpResponse.statusCode) {
       case HttpStatusCode.unauthorized:
         throw new UnAuthorizedError(httpResponse.body.message)
+      default:
+        throw new ServerError(httpResponse.body.message)
     }
-    return null
   }
 }
