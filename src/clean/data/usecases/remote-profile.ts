@@ -1,0 +1,1 @@
+export { useProfileQuery, useProfileLazyQuery } from '@clean/graphql/generated/graphql'

@@ -1,3 +1,4 @@
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client'
 import { Navbar } from '@clean/presentation/components/hoc'
 import faker from '@faker-js/faker'
 import { fireEvent, render, screen } from '@testing-library/react'
@@ -17,12 +18,20 @@ type SutTypes = {
 
 const makeSut = (pathname: string = '/'): SutTypes => {
   const router = createMockRouter({ pathname })
+
+  const client = new ApolloClient({
+    cache: new InMemoryCache(),
+    link: null
+  })
+
   render(
-    <RouterContext.Provider value={router}>
-      <Navbar>
-        <div data-testid="child"></div>
-      </Navbar>
-    </RouterContext.Provider>
+    <ApolloProvider client={client}>
+      <RouterContext.Provider value={router}>
+        <Navbar>
+          <div data-testid="child"></div>
+        </Navbar>
+      </RouterContext.Provider>
+    </ApolloProvider>
   )
 
   return {

@@ -1,3 +1,4 @@
+import { useProfileQuery } from '@clean/data/usecases'
 import { Image } from '@clean/presentation/components/common'
 import OutlineButton from '@clean/presentation/components/common/buttons/OutlineButton/OutlineButton'
 import PrimaryButton from '@clean/presentation/components/common/buttons/PrimaryButton/PrimaryButton'
@@ -11,13 +12,15 @@ import { studentProfileModalContent } from './contents/navbarContent'
 import classes from './Navbar.module.scss'
 
 const Navbar: React.FC<PropsChild> = props => {
+  //every time we visit this page we are gonna make a new request (no caching)
+  const { data, loading, error } = useProfileQuery({ fetchPolicy: 'network-only' })
   const [loggedIn, setLoggedIn] = useState(false)
   const [openStudentProfileModal, setStudentProfileModal] = useState(false)
   const [showOffer, setShowOffer] = useState([classes.container, classes.move])
   const [closeOffer, setCloseOffer] = useState(false)
 
   const router = useRouter()
-  
+
   useEffect(() => {
     handleScroll()
     window.addEventListener('scroll', handleScroll)
@@ -80,8 +83,12 @@ const Navbar: React.FC<PropsChild> = props => {
     return null
   }
 
+  if (error) {
+    console.log(error)
+  }
+
   function renderNavContent() {
-    if (loggedIn) {
+    if (data?.profile) {
       return (
         <>
           {/* <Link to='/notifications'>
